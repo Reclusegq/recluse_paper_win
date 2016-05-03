@@ -1,0 +1,436 @@
+﻿
+\chapter{基于移动场景下的无线体域网间同频干扰的抑制}
+
+\section{引言}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{系统模型}
+\subsection{移动模型}
+无线体域网的移动性主要包含两部分，单个无线体域网内部的每个传感器节点单独运动和整个无线体域网里的所有节点作为一个整体进行运动两部分组成，对应的移动性模型分别是点移动模型和组移动模型。经过调研，最适合于我们场景的是参考点组移动模型(Reference Point Group Mobility, RPGM) 框架\scite{hong1999group,camp2002survey}。 如下\autoref{fig:texworks} 所示，在RPGM 框架里，无线体域网的逻辑中心（也就是
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\textwidth]{mobilitymodel1}
+\figcaption{RPGM 参考点组移动模型框架}
+\label{fig:texworks}
+\end{figure}
+中心节点）的运动代表了无线体域网
+整体的组运动，而部署在身上的其他传感器节点都有一个与之对应的参考点（Reference Point，RP），参考点
+相对于逻辑中心的位置假设是不变的，传感器节点在自己的参考点附近的一个小圆(球)区域里面随机运动，因此，任意一个传感器节点的位置移动由组移动向量$\overrightarrow {{\rm{GM}}} $和节点的随机运动向量$\overrightarrow {{\rm{RM}}} $两部分叠加组成。进一步在RPGM 移动框架里，传感器节点或者中心节点的运动轨迹可由随机路点移动模型 (Random Waypoint Mobility Model，RWMM) \scite{hyytia2005random}产生。
+
+
+在我们的移动性分析场景下，假设 \({L_i}\)表示第$i$个无线体域网的中心节点的初始位置，\({L_{ij}}\)表示第$i$个无线体域网的第$j$个传感器节点的初始位置，第$i$个无线体域网的中心节点运动区域为一个以 \({L_i}\)为圆心，半径为 \({R_i}\)的圆形区域；而第$i$个无线体域网身上的第$j$个传感器节点的运动区域为一个以 \({L_{ij}}\)为初始位置，半径为\({R_{ij}}\) 的球形区域。RWMM 模型里节点随机选择一个方向和速度前进，节点每次运行恒定的距离或者恒定的时间，然后选择一个新的方向和速度继续运动，当节点运行到仿真边界会反弹回来继续运动。另外，身体有多种活动姿势(Mobility Posture, MP)，包括行走(Walking)、 跑动(Running)、 站立(Standing)、 坐下(Sitting)、 躺下(Lying) 等，表示为集合MP={Walking，Running，Standing，Sitting，Lying}，在各种姿势下，人体的活动剧烈程度不同,可以通过对不同的姿势设置不同的活动半径来体现，如第$i$个无线体域网、以及其第$j$个传感器节点在任意一种活动姿势\(m{p_i}\) 下的活动区域半径分别为 \(R_i^{m{p_i}}\)和\(R_{ij}^{m{p_i}}\) 。 假设在我们的分析场景下，各种姿势的持续时间较长，足以保证各无线体域网收敛到纳什均衡状态。
+在二维平面下，利用RWMM 移动模型进行移动时候的方向选择范围是[0,2π]，速度是在一个给定的范围内的随机值。则根据文献可知，假设第 $i$个无线体域网在活动姿势$mp_i$下利用RWMM 模型产生运动轨迹，则它的中心节点一段时间之后在活动范围内的任意位置\(Lo{c_i}\) 处的位置概率密度函数 \(f_i^{m{p_i}}(Lo{c_i})\)为：
+\begin{equation}
+f_i^{m{p_i}}(Lo{c_i}) = f_i^{m{p_i}}({L_i} + {{\bf{x}}_i}) = \frac{1}{C}h_i^{m{p_i}}(r){\kern 1pt} {\kern 1pt}
+\end{equation}
+其中，$C$、$h_i^{m{p_i}}$和$r$分别为：
+\begin{equation}
+\begin{array}{l}
+C = \int_0^{R_i^{m{p_i}}} {2\pi rh_i^{m{p_i}}(r)} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} r = sqrt(\left\| {Lo{c_i} - {L_i}} \right\|){\kern 1pt} {\kern 1pt}  = sqrt(\left\| {{{\bf{x}}_i}} \right\|){\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} \\
+{\kern 1pt} {\kern 1pt} h_i^{m{p_i}}(r){\kern 1pt} {\kern 1pt} {\kern 1pt}  = \int_0^\pi  {2(R{{_i^{m{p_i}}}^2} - {r^2})\sqrt {R{{_i^{m{p_i}}}^2} - {r^2}{{\cos }^2}\theta } } d\theta
+\end{array}
+\end{equation}
+其中${{\bf{x}}_{i}}$表示第$i$个无线体域网相对于初始位置的组移动分量。
+
+
+而第$i$个无线体域网身上的第$j$个传感器节点一方面伴随着第$i$个无线体域网的中心节点在活动姿势$mp_i$下进行组移动，另一方面，传感器节点会在以自己的参考点为中心，半径为 $R_{ij}^{m{p_i}}$的球形区域里面利用三维RWMM 模型进行点移动。假设当前第$i$ 个无线体域网的中心节点的位置为$Lo{c_i}$ ，第$i$个无线体域网的第$j$个传感器节点的参考点的位置是$L_{ij}^{Lo{c_i}}$ ，则根据文献可知，第 $j$个传感器节点在活动姿势$mp_i$下，并且只考虑点移动带来的影响，一段时间之后在活动范围内的任意位置 $Lo{c_{ij}}$处的位置概率密度函数 如下式11 所示。
+\begin{equation}
+f_{ij}^{m{p_i}}(Lo{c_{ij}}) = f_{ij}^{m{p_i}}({L_{ij}} + {{\bf{x}}_{ij}} + {{\bf{x}}_i}) = \frac{{35}}{{288\pi {R_{ij}}{{^{m{p_i}}}^7}}}\left( {21{R_{ij}}{{^{m{p_i}}}^4} - 34{r^2}{R_{ij}}{{^{m{p_i}}}^2} + 13{r^4}} \right)
+\end{equation}
+其中$r$表示为：
+\begin{equation}
+r = sqrt(\left\| {Lo{c_{ij}} - L_{ij}^{{{\bf{x}}_i}}} \right\|){\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt}  = sqrt(\left\| {({L_{ij}} + {{\bf{x}}_{ij}} + {{\bf{x}}_i}) - ({L_{ij}} + {{\bf{x}}_i})} \right\|) = sqrt(\left\| {{{\bf{x}}_{ij}}} \right\|)
+\end{equation}
+其中， \({{\bf{x}}_{ij}}\)表示第$i$个无线体域网的第$j$个节点相对于初始位置的点移动分量。
+
+
+//去除词频统计中的数字和特殊符号
+		    Iterator itofword=wordFreq.keySet().iterator();
+	        while(itofword.hasNext())
+	        {
+	            String str=(String)itofword.next();
+	            //如果包含数字或者特殊字符，则删除这个词频统计
+	            if(isNumeric(str)||str.indexOf("'")!=-1||str.indexOf("-lrb-")!=-1||str.indexOf("-rrb-")!=-1||str.indexOf("-rsb-")!=-1||
+	            		str.indexOf("（")!=-1||str.indexOf("）")!=-1||str.indexOf("-lsb-")!=-1||str.charAt(0)==9632){
+	            	itofword.remove();
+	            	}
+	        }
+
+	
+	
+	 	 }
+	 }
+	//判断Str是否包含数字，是则返回true
+	public static boolean isNumeric(String str){
+		for (int i = 0; i < str.length(); i++){
+		//System.out.println(str.charAt(i));
+		if (Character.isDigit(str.charAt(i))){
+		return true;
+		}
+		}
+		return false;
+		}
+
+\subsection{信道模型}
+
+\subsection{系统参数设定}
+\subsection{博弈模型}
+
+下面对我们的考虑的场景进行描述：我们假设共有\(Mobility\) 个无线体域网占用相同信道工作，用 表示第 个无线体域网，共包含有 个传感器节点。我们假设各个无线体域网内部的每个传感器节点无冲突的工作在中心节点分配的时隙里。定义一个节点同步工作集合 ，表示当前时刻各个无线体域网同时工作的节点集合，其中第 个无线体域网内部当前时刻是第 个传感器节点占用时隙在工作。进一步的当第 个无线体域网的当前是第 个节点工作时的同步工作集合表示为： 。
+
+
+\section{博弈解分析}
+通过将无线体域网间的共存干扰问题模拟成一个无合作的节点博弈问题，而博弈的解就是每个节点都保证自己性能的同时给别人带来最小干扰的最佳选择策略。我们在本文中证明了该博弈解的存在性，并推导了保证解的唯一性的充分条件，下面分别述之:
+博弈解的分析有助于设计出高效的博弈解求解算法。
+
+\subsection{博弈解的存在性分析}
+
+\begin{theorem}
+${G_{node}^m}$ 博弈至少拥有一个纳什均衡解。
+\end{theorem}
+\begin{proof}
+    \begin{definition}
+    \(p_{ij}^{mp_i*} \) 是${G_{node}^m}$ 博弈的一个纳什均衡解当且仅当 :
+    \begin{equation}
+    p_{ij}^{m{p_i} * } \in \arg \mathop {\min }\limits_{p_{ij}^{m{p_i}}} \pi _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},\textbf{P}_{ - \{ p_{ij}^{m{p_i}}\} }^{m*})
+    \end{equation}
+    对于${G_{node}^m}$ 博弈内的任意参与者都成立。
+    \end{definition}
+
+    证明同静止场景下的证明方法类似，主要是讨论节点损失函数的二阶导数的正负性，推导出第$i$ 个无线体域网的第$j$ 个节点的损失函数的一阶导数和二阶导数分别如\autoref{theorem1_4_1} 和式\autoref{theorem1_4_2} 所示：
+\begin{equation}
+\resizebox{0.985\hsize}{!}{$\begin{array}{l}
+\frac{{\partial \pi _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},\textbf{\emph{P}}_{ - \{ p_{ij}^{m{p_i}}\} }^m)}}{{\partial p_{ij}^{m{p_i}}}} = \sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {\int\limits_{\overrightarrow {\bf{x}} } {[(2(\gamma _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},{\textbf{\emph{w}}_{ij}}) - \gamma _{ij}^{tar{\kern 1pt} m})} } \frac{{\partial \gamma _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},{\textbf{\emph{w}}_{ij}})}}{{\partial p_{ij}^{m{p_i}}}}\\
+ {\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}+ \beta _{ij}^m)\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})]} d\overrightarrow {\bf{x}} P{r_{ - i}}({\textbf{\emph{w}}_{ij}})
+ \end{array}$}
+ \label{theorem1_4_1}
+\end{equation}
+\begin{equation}
+\begin{array}{l}
+   \frac{{{\partial ^2}\pi _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},\textbf{\emph{P}}_{ - \{ p_{ij}^{m{p_i}}\} }^m)}}{{{\partial ^2}p_{ij}^{m{p_i}}}} = 2\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {[\int\limits_{\overrightarrow {\bf{x}} } {{{\left( {\frac{{\partial \gamma _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},{\textbf{\emph{w}}_{ij}})}}{{\partial p_{ij}^{m{p_i}}}}} \right)}^2}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } ]P{r_{ - i}}({\textbf{\emph{w}}_{ij}})}
+    \label{theorem1_4_2}
+    \end{array}
+\end{equation}
+
+进一步\autoref{theorem1_4_2} 式可以被带入化简为如下所示：
+\begin{equation}
+\resizebox{0.988\hsize}{!}{$\begin{array}{l}
+\frac{{{\partial ^2}\pi _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},P_{ - \{ p_{ij}^{m{p_i}}\} }^m)}}{{{\partial ^2}p_{ij}^{m{p_i}}}} = 2\sum\limits_{{w_{ij}} \in {W_{ij}}} {[\int\limits_{\overrightarrow {\bf{x}} } {{{\left( {\frac{{g_{_{iij}}^m}}{{\sum\limits_{k = 1,k \ne i}^M {g_{_{ik{w_k}}}^mp_{k{w_k}}^{m{p_k}} + {\sigma _i}^2} }}} \right)}^2}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } ]P{r_{ - i}}({w_{ij}})}
+\label{theorem1_4_3}
+\end{array}
+$}
+\end{equation}
+
+根据博弈论定理\scite{fudenberg1991game,berinde2007iterative}，策略空间是欧氏空间中的非空、有界、闭凸集合，且损失函数的偏导数是凸的，则该博弈至少存在一个纯策略纳什均衡解。由证明结果可知，虽然移动性场景下的路径衰落是个变化的值，但是参与者损失函数的二阶导数必定是个正直，所以依据定理${G_{node}^m}$ 博弈至少有一个纳什均衡解得证。
+\end{proof}
+
+
+\subsection{博弈解的唯一性分析}
+\begin{theorem}
+${G_{node}^m}$ 博弈纳什均衡解是唯一的，只要条件：
+\begin{equation}
+\resizebox{0.92\hsize}{!}{$\frac{{\sum\limits_{n = 1,n \ne i}^M {\int\limits_{\overrightarrow {\bf{x}} } {B\gamma _{ij}^{tar{\kern 1pt} m}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } }  - \int\limits_{\overrightarrow {\bf{x}} } {{A^2}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } {\kern 1pt} {\kern 1pt} }}{{2\sum\limits_{n = 1,n \ne i}^M {\int\limits_{\overrightarrow {\bf{x}} } {AB\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } } }} < p_{ij}^{m{p_i}} \le \frac{{\gamma _{ij}^{tar{\kern 1pt} m}}}{{2A}}$}
+\label{221}
+\end{equation}
+对于任意的参与者均成立，其中:
+\begin{equation}
+\resizebox{0.68\hsize}{!}{$A = \frac{{g_{_{iij}}^m}}{{\sum\limits_{k = 1,k \ne i}^M {g_{_{ik{w_k}}}^mp_{k{w_k}}^{m{p_k}} + {\sigma _i}^2} }}{\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} {\kern 1pt} B = \frac{{g_{_{in{w_n}}}^mg_{_{iij}}^m}}{{{{\left( {\sum\limits_{k = 1,k \ne i}^M {g_{_{ik{w_k}}}^mp_{k{w_k}}^{m{p_k}} + {\sigma _i}^2} } \right)}^2}}}$}
+\end{equation}
+\label{222}
+\end{theorem}
+\begin{proof}
+
+根据本文第3 章推导的静止场景下的引理\autoref{lemma1} 可知，只需要保证所有参与者损失函数的海森伯格矩阵是行主对角占优，这样就可以保证博弈使具有唯一的纳什均衡解，因此证明的关键就是保证式子\autoref{theorem4_2} 成立：
+\begin{equation}
+\sum\limits_{n = 1}^M {\sum\limits_{\scriptstyle{w_n} = 1\atop
+\scriptstyle if\;n = i,{w_n} \ne j}^{\left\| {{W_n}} \right\|} {\left| {\frac{{{\partial ^2}\pi _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},\textbf{\emph{P}}_{ - \{ p_{ij}^{m{p_i}}\} }^m)}}{{\partial p_{ij}^{m{p_i}}\partial p_{n{w_n}}^{m{p_n}}}}} \right| < } } \frac{{{\partial ^2}\pi _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},\textbf{\emph{P}}_{ - \{ p_{ij}^{m{p_i}}\} }^m)}}{{{\partial ^2}p_{ij}^{m{p_i}}}}
+\label{theorem4_2}
+\end{equation}
+
+其中，第$i$ 个无线体域网的第$j$ 个传感器节点的二阶导数可由\autoref{theorem1_4_3} 式得到,而二阶偏导在$i \ne n$ 时为：
+\begin{equation}
+\resizebox{0.99\hsize}{!}{$\frac{{{\partial ^2}\pi _{ij}^{m{p_i}}(p_{ij}^{m{p_i}},\textbf{\emph{P}}_{ - \{ p_{ij}^{m{p_i}}\} }^m)}}{{\partial p_{ij}^{m{p_i}}\partial p_{n{w_n}}^{m{p_n}}}}{\kern 1pt}  = 2\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {\int\limits_{\overrightarrow {\bf{x}} } {(\gamma _{ij}^{tar{\kern 1pt} m}B - 2p_{ij}^{m{p_i}}AB)\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } P{r_{ - i}}({\textbf{\emph{w}}_{ij}})}$}
+\label{42}
+\end{equation}
+
+二阶偏导在$i=n$ 时为：
+\begin{equation}
+\frac{{\partial \pi _{ij}^2({p_{ij}^{m{p_i}}},{\textbf{\emph{P}}_{ - \{ {p_{ij}}\} }^m})}}{{\partial {p_{ij}^{m{p_i}}}\partial {p_{n{w_n}}^{m{p_i}}}}} = 0,{\kern 1pt} {\kern 1pt} {w_n} \ne j
+\label{weiyi3}
+\end{equation}
+
+将\autoref{theorem1_4_3},\autoref{42} 和\autoref{weiyi3} 带入\autoref{theorem4_2}, 进行展开化简可以进一步得到需要满足的式子为：
+\begin{equation}
+\resizebox{0.99\hsize}{!}{$\begin{array}{l}
+\sum\limits_{n = 1}^M {\sum\limits_{\scriptstyle{w_n} = 1\atop
+\scriptstyle if\;n = i,{w_n} \ne j}^{\left\| {{W_n}} \right\|} {\left| {2\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {\int\limits_{\overrightarrow {\bf{x}} } {(\gamma _{ij}^{tar{\kern 1pt} m}B - 2p_{ij}^{m{p_i}}AB)\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } P{r_{ - i}}({\textbf{\emph{w}}_{ij}})} } \right| < } } \\
+{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}{\kern 1pt}2\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\emph{\textbf{W}}_{ij}}} {[\int\limits_{\overrightarrow {\bf{x}} } {{A^2}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} } ]P{r_{ - i}}({\textbf{\emph{w}}_{ij}})}
+\end{array}$}
+\label{27}
+\end{equation}
+
+分析\autoref{27} 两边的内容，我们可以发现\autoref{27} 两边的式子都包含有用户$W_{ij}$ 的所有同步工作集的内容项，不难得出，保证\autoref{27} 成立的一个充分条件就是使得用户$W_{ij}$ 的每一个同步工作集都有上面的小于关系成立。因此，从\autoref{27} 两边取出属于用户$W_{ij}$ 的同一个同步工作集的内容项，保持式子的符号关系不变，得到使得\autoref{27} 成立的充分条件如下所示：
+\begin{equation}
+\resizebox{0.99\hsize}{!}{$
+\sum\limits_{n = 1,n \ne i}^M {\left| {\int\limits_{\overrightarrow {\bf{x}} } {(\gamma _{ij}^{tar{\kern 1pt} m}B - 2p_{ij}^{m{p_i}}AB)\prod\limits_{k = 1}^M {f({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}}){\rm{d}}\overrightarrow {\bf{x}} } } } \right|}  < \int\limits_{\overrightarrow {\bf{x}} } {{A^2}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\bf{x}} }
+$}
+\label{28}
+\end{equation}
+
+为了使得\autoref{28} 成立，可以适当放松\autoref{28} 左边的条件，一个充分的条件就是假设绝对值符号里面的内容恒为正或者恒为负，从而打开绝对值符号，达到化简的目的。因此我们可以最终得到保证${G_{node}^m}$ 博弈拥有唯一性纳什均衡解的充分条件如\autoref{221} 和\autoref{222} 所示，与静止时候的保证纳什均衡唯一性的充分条件对比可以发现，两种场景下的保证唯一性纳什均衡解的充分条件在形式上完全一致。？？？？？？？？？？？？？？？？？？？
+\end{proof}
+
+
+
+
+
+\section{纳什均衡解的求解算法设计}
+
+
+
+
+MISE 算法效用函数的计算公式
+\begin{equation}
+\pi _{ij}^{m{p_i}}({P^m}) = \sum\limits_{k = 1}^{IL} {\int\limits_{\overrightarrow {\bf{x}} } {[{{(\gamma _{ij}^{tar{\kern 1pt} m} - \frac{{g_{_{iij}}^mp_{ij}^{m{p_i}}}}{{{I_{ij}}(k)}})}^2} + \beta _{ij}^mp_{ij}^{m{p_i}}]f_{k{w_k}}^{m{p_k}}({{\bf{x}}_k},{{\bf{x}}_{k{w_k}}}){\rm{d}}\overrightarrow {\bf{x}} P} } {r_{ - i}}({w_{ij}})
+\end{equation}
+
+
+\begin{equation}
+p_{ij}^{m{p_i}}{\kern 1pt} {\kern 1pt}  = \frac{{\sum\limits_{{\textbf{w}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {\int\limits_{\overrightarrow {\textbf{x}} } {\frac{{\gamma _{ij}^{tar{\kern 1pt} m}}{g_{_{iij}}^m}}{{I_{ij}^{m{p_i}}(\overrightarrow {\textbf{x}} )}}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\textbf{x}}_k},{{\textbf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\textbf{x}} } P{r_{ - i}}({\textbf{w}_{ij}})}  - \frac{{{\beta _{ij}^m}}}{{\rm{2}}}}}{{\sum\limits_{{\textbf{w}_{ij}} \in {\emph{\textbf{W}}_{ij}}} {\int\limits_{\overrightarrow {\textbf{x}} } {{{\left( {\frac{{g_{_{iij}}^m}}{{I_{ij}^{m{p_i}}(\overrightarrow {\textbf{x}} )}}} \right)}^{\rm{2}}}\prod\limits_{k = 1}^M {f_{k{w_k}}^{m{p_k}}({{\textbf{x}}_k},{{\textbf{x}}_{k{w_k}}})} {\rm{d}}\overrightarrow {\textbf{x}} } P{r_{ - i}}({\textbf{w}_{ij}})} }}
+\label{powerupdated}
+\end{equation}
+
+
+\begin{equation}
+p_{ij}^{m{p_i}}{\kern 1pt} {\kern 1pt}  = \frac{{\sum\limits_{k = 1}^{I\!L} {\frac{{\gamma _{ij}^{tar{\kern 1pt} m}g_{_{iij}}^m}}{{{I_{ij}}(k)}}Pr({I_{ij}}(k))}  - \frac{{{\beta _{ij}^m}}}{{\rm{2}}}}}{{\sum\limits_{k = 1}^{I\!L} {{{\left( {\frac{{g_{_{iij}}^m}}{{{I_{ij}}(k)}}} \right)}^{\rm{2}}}Pr({I_{ij}}(k))} }}
+\label{power}
+\end{equation}
+
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\BlankLine
+\emph{ 如果$W_{ij}$ 在$t$ 时刻没有被安排工作，就不进入算法进行功率更新；否则第$i$ 个无线体域网的协调器初始化$R\!H\!I$, $I\!L$，${\gamma _{ij}^{tar m}}$, ${{g_{iij}^m}}$, ${\beta _{ij}^m}$，当前传输功率$p_{ij}^{mp_it}$，当前接收信号强度$S_{ij}^{t}$ 和历史保存的干扰序列$I_i^{arr}$:
+\begin{displaymath}
+I_i^{arr} = \left\{ \begin{array}{ll}
+\{I_i^{t-1}, I_i^{t-2} \cdots I_i^{1}\} & \textrm{if $t < R\!H\!I$}\\
+\{I_i^{t-1}, I_i^{t-2} \cdots I_i^{t-R\!H\!I+1}\} & \textrm{if $t \ge R\!H\!I$}\\
+ \end{array} \right.
+\end{displaymath}}\\
+\emph{计算第$i$ 个无线体域网的协调器收到的干扰值：$ I_{i}^{t}=S_{ij}^{t}-{{p_{ij}^{t}}}\times{{g_{iij}}}$}\\
+\emph{计算干扰值分段间隔：\({I_{base}^m} = (\max \{ I_i^t, I_i^{arr}\} - \min \{ I_i^t, I_i^{arr}\}) /I\!L\)}\\
+\emph{对$I_{ij}(k)$和$Pr(I_{ij}(k))$, $k \in 1,2 \cdot  \cdot  \cdot I\!L$} 进行估计：\\
+\emph{$ I_i^{min}= \min \{ I_i^t, I_i^{arr}\}$}\\
+\emph{$tt$=$t-R\!H\!I$+1}\\
+\If{$ t < R\!H\!I$}
+{$\  tt$=1}
+\For{$kk=tt$ \KwTo $t$}{
+\For{$kkk=1$ \KwTo $I\!L$}{
+\If{$I_i^{kk}-I_i^{min} > (kkk-1)*I_{base}^m$ and $I_i^{kk}-I_i^{min} \le kkk*I_{base}^m$}
+{第$kkk$段的干扰次数加一：$Count(kkk)$++,\\
+ 第$kkk$ 段的干扰时间加权个数：$Count2(kkk)=Count2(kkk)+kk-tt$,\\
+ 第$kkk$ 段的干扰值累加：$Interference(kkk)+=I_i^{kk}$;
+}
+}}
+\For{$k=1$ \KwTo $I\!L$}{
+    第$k$ 段的干扰值大小为：$I_{ij}(k)$=$Interference(k)$/$Count(k)$\\
+    第$k$ 段干扰值的概率为：$Pr(I_{ij}(k))$=$2Count2(k)$/$R\!H\!I$/$(R\!H\!I+1)$\\
+}
+\emph{利用式子？？？？进行用户$W_{ij}$ 计算进行功率的更新}\\
+\emph{$t=t+1$，跳转到第2 步继续执行算法}\\
+\caption{Interference Segmentation Estimate (ISE) algorithm}\label{algo_disjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+
+
+
+
+
+
+
+
+
+\section{仿真实验}
+
+\section{移动性场景下的算法性能仿真}
+在一些社区棋牌室，咖啡厅，阅览室等人们活动活动范围不大，活动不剧烈的半运动场景下，我们来验证同频干扰抑制算法的有效性。
+假设每个WBAN 都在各自的一个小区域内活动，为了简化分析，假设身体处于的可能姿势包括坐、站立、行走、躺下；另外人们在不同的环境中，身体处于这些姿势的概率是不一样的。比如在室外，躺下的概率就很低，而在卧室，人处于躺下的概率就很高；因此借鉴论文【MoBAN】 的结论，假设处于这样的半静态环境中的各个姿势的稳态概率为[0.5 0.25 0.15 0.1]。
+
+一阶马尔科夫链来模拟人身体姿势的转移过程，马尔科夫的一个状态对应身体的某个姿势，状态的转移对应着身体姿势的活动。
+
+为了简化仿真场景，我们从一段时间统计来看，假设WBAN 处于活动区域内各个位置的概率服从均匀分布。
+
+\subsection{移动仿真场景设置}
+假设我们的半静态仿真场景下一共有3 个WBAN，每个WBAN 拥有一个中心节点以及3 个传感器节点，节点1 部署在手臂上，节点2 部署在胸上，节点3 部署在大腿上。每个WBAN 活动的区域为一个半径为2m 的圆形区域，且各个区域相互不交叠（各自活动区域重叠的话，可能会使得彼此的干扰急剧增大，同频干扰抑制的方法面临失效，可以配合其他的策略如使用不同信道工作）。假设每个WBAN 可能处于的4 种姿势相互之间的转移概率如图所示：
+
+
+-------------------------------------------------------------------------------------------
+有3 个无线体域网分布在了50*50m 的正方形仿真区域里，每个无线体域网的活动半径为1 米的圆形区域，无线体域网内部的传感器节点的活动半径为30mm 的球形区域。 持续的时隙数目为200 个，每个无线体域网的组移动持续10 个时隙，点移动间隔10 个时隙 （1个时隙1s）
+节点运动
+
+\autoref{tab:SHIYAN2tab1}  \autoref{tab:SHIYAN2tab2}
+
+\begin{table}[!htb]
+\centering
+\caption{无线体域网链路场景描述}
+\label{tab:SHIYAN2tab1}
+\tabcolsep 10pt %space between two columns. 用于调整列间距
+\begin{tabular}{c c}
+\hline
+系统参数列表 & 参数取值 \\
+\hline
+传输概率：WBAN1={N1,N2,N3}& [0.50, 0.25, 0.25]\\
+传输概率：WBAN2={N1,N2,N3}& [0.40, 0.50, 0.10]\\
+传输概率：WBAN3={N1,N2,N3}& [0.30, 0.40, 0.30]\\
+目标信噪比：WBAN1={N1,N2,N3}& [4.20, 3.80, 4.10]\\
+目标信噪比：WBAN2={N1,N2,N3}& [4.00, 4.20, 4.00]\\
+目标信噪比：WBAN3={N1,N2,N3}& [4.20, 4.30, 4.40]\\
+仿真区域长度：simulength &  50m \\
+仿真区域宽度：simuwidth &  50m \\
+节点调节因子：beta &  9\\
+信道噪声：noise& -60dBm\\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+
+\begin{table}[htb]
+\centering
+\caption{无线体域网链路场景描述}
+\label{tab:SHIYAN2tab2}
+\tabcolsep 10pt %space between two columns. 用于调整列间距
+\begin{tabular}{c c c c c}
+\hline
+移动参数列表 & 参数取值 \\
+\hline
+WBAN 中心节点活动半径：  Radus &   1m\\
+WBAN 普通节点活动半径：  radus &   30mm\\
+WBAN 组移动占用时隙：   wbantimeslot& 10\\
+WBAN 点移动占用时隙：   nodetimeslot& 10\\
+WBAN 组移动速度最大值：groupspeedmax &1000mm/s\\
+WBAN 组移动速度最小值：groupspeedmin &300mm/s\\
+WBAN 点移动速度最大值：nodespeedmax &10mm/s\\
+WBAN 点移动速度最小值：nodespeedmin &0\\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+
+
+
+\subsection{仿真实验}
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+是不是还要添加各个姿势之间切换的仿真实验？？？？？？？？？？？？？？
+
+\subsection{理想算法介绍}
+理想算法就是每个无线体域网协调器进行功率更新计算的时候，能直接获得更新传输功率所需要的所有必要信息，包括协调器收到的干扰值大小和干扰的联合概率值。此外在移动性场景下的位置概率密度函数可以通过之前讨论？？？？？？？？？？？？？？获得。对式子的计算由于涉及到n 重非线性积分，常规的积分方法由于计算量太大，消耗时间太长，或者根本无法算法解析解或者数值解出来，一个更高效的方法就是引入蒙特卡罗积分法进行计算\scite{wupeng2010matlab}，通常称为随机撒点法，在进行积分运算时与积分重数无关的优点使得它在高维积分的时候显示出优秀的性能。蒙特卡罗方法有很多种，我们使用的是等分布序列蒙特卡罗法。
+
+假设$D$ 是$n$ 维空间$R^n$ 中的一个积分区域，其中$f(x)$ 是被积函数，表示为\(f(x) \in D \subset {R^n} \to R\)，那么$n$ 重积分可以用下面的式子表示：
+\begin{equation}
+{\kern 1pt} {\kern 1pt} I = \int_D {f(x)dx}
+\end{equation}
+$I$ 可以表示为积分区域$D$ 的测度与被积函数${f(x)}$ 期望的乘积来计算。蒙特卡罗的思想就是寻找一个超立方体(测度可以表示为$M_C$) 来包含积分区域$D$，在区域内随机生成$n$ 个均匀分布的点，从而再统计落入积分区域$D$ 的点个数，假设有$m$ 个，则积分区域$D$ 的测度可以进一步表示为：
+\begin{equation}
+{M_D} \approx \frac{{m{M_C}}}{n}
+\end{equation}
+另外，被积函数${f(x)}$ 的期望可以表示为：
+\begin{equation}
+\overline f  \approx \frac{1}{m}\sum\limits_{i \in D} {f({x_i})}
+\end{equation}
+这样，我们最终可以得到蒙特卡罗计算$n$ 重积分的公式：
+\begin{equation}
+I \approx {M_D}\overline f  = \frac{{{M_C}}}{n}\sum\limits_{i \in D} {f({x_i})}
+\end{equation}
+
+如\autoref{fig:WBANstructure} 所示。
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{ustc_paper_power_convergence}
+\figcaption{MISE 算法和理想算法的功率收敛曲线对比图}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\textwidth]{ustc_paper_utility_convergence}
+\figcaption{移动场景下MISE 算法和理想算法的损耗收敛曲线对比图}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{mobility_power_error}
+\figcaption{移动场景下MISE 算法和理想算法在不同移动场景下的功率收敛误差曲线图}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{mobility_utility_error}
+\figcaption{MISE 算法和理想算法在不同移动场景下的损耗收敛误差曲线图}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{beta}
+\figcaption{移动场景下价值参数对平均功率和平均信噪比误差的影响对比图}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{il_rhi_mape}
+\figcaption{移动场景下功率MAPE 与干扰段数IL 和利用的历史数据长度RHI 的关系图}
+\end{figure}
+
+\section{本章小结}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

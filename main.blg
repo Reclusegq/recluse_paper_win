@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/W32TeX)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: chapter/abstract.aux
+A level-1 auxiliary file: chapter/denotation.aux
+A level-1 auxiliary file: chapter/chap-intro.aux
+A level-1 auxiliary file: chapter/chap-guide.aux
+A level-1 auxiliary file: chapter/chap-second.aux
+A level-1 auxiliary file: chapter/chap-third.aux
+A level-1 auxiliary file: chapter/chap-fourth.aux
+A level-1 auxiliary file: chapter/chap-example.aux
+The style file: ustcbib.bst
+A level-1 auxiliary file: chapter/thanks.aux
+A level-1 auxiliary file: chapter/pub.aux
+Database file #1: bib/tex.bib
+Warning--I didn't find a database entry for ""
+Warning--there's a publisher but no address in kozina2013efficient
+Warning--there's a publisher but no address in zappi2008activity
+Warning--there's a publisher but no address in lee2011activity
+Warning--there's a publisher but no address in brezmes2009activity
+Warning--there's a publisher but no address in lester2006practical
+You've used 53 entries,
+            2219 wiz_defined-function locations,
+            862 strings with 16535 characters,
+and the built_in function-call counts, 32683 in all, are:
+= -- 3521
+> -- 715
+< -- 38
++ -- 332
+- -- 166
+* -- 2478
+:= -- 4150
+add.period$ -- 172
+call.type$ -- 53
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 58
+duplicate$ -- 2346
+empty$ -- 3292
+format.name$ -- 217
+if$ -- 7678
+int.to.chr$ -- 0
+int.to.str$ -- 53
+missing$ -- 53
+newline$ -- 352
+num.names$ -- 53
+pop$ -- 268
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 706
+stack$ -- 0
+substring$ -- 4483
+swap$ -- 341
+text.length$ -- 38
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 5
+while$ -- 358
+width$ -- 55
+write$ -- 701
+(There were 6 warnings)

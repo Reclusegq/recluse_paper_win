@@ -1,0 +1,42 @@
+﻿\begin{denotation}
+
+\item[WBAN] 无线体域网 (Wireless Body Area Network)
+\item[QoS] 服务质量(Quality of Service)
+\item[SINR]	信干扰比(Signal to Interference and Noise Ratio)
+\item[PL(d)] 路径损耗(Path Loss)
+\item[${\gamma _{ij}}$] 第$i$个无线体域网的第$j$个节点的信噪比
+\item[$W_m$] 第$m$个无线体域网
+\item[$\textbf{\emph{w}}_{ij}$] 第$i$个无线体域网的第$j$个节点的同步工作集
+\item[$\textbf{\emph{W}}_{ij}$] 第$i$个无线体域网的第$j$个节点的同步工作集组
+\item[$p_{ij}$] 第$i$个无线体域网的第$j$个节点的发送功率
+\item[$g_{ikw_k}$] 第$k$个无线体域网的第$w_k$个节点到第$i$个无线体域网的中心节点的增益
+\item[${{\sigma _{i}^2}}$] 第$i$个无线体域网的信道噪声
+\item[$U_{ij}$] 第$i$个无线体域网的第$j$个节点的损耗函数
+\item[$\gamma _{ij}^{tar}$] 第$i$个无线体域网的第$j$个节点的期望信噪比
+\item[$\beta_{ij}$] 第$i$个无线体域网的第$j$个节点的平衡因子
+\item[$\mathbb{G}_{WBAN}$] 静止场景下的博弈模型
+\item[$W_{WBAN}$] 博弈模型$\mathbb{G}_{WBAN}$的用户空间
+\item[$A_{WBAN}$] 博弈模型$\mathbb{G}_{WBAN}$的策略空间
+\item[$\Pi_{WBAN}$] 博弈模型$\mathbb{G}_{WBAN}$的损耗函数集合
+\item[${\pi _i}$] 第$i$个无线体域网的期望损耗函数
+\item[${\pi _{ij}}$] 第$i$个无线体域网的第$j$个传感器节点的期望损耗函数
+\item[RHI] 接收历史干扰长度(Received Historical Interference)
+\item[IL] 干扰等级数(Interference Level)
+\item[$f_{i}^{m{p_i}}$] 第$i$个无线体域网在活动姿势$mp_i$下的位置概率密度函数
+\item[$f_{ij}^{m{p_i}}$] 第$i$个无线体域网的第$j$个节点在活动姿势$mp_i$下的位置概率密度函数
+\item[$g_{ikw_k}^m$] 移动性场景下第$k$个无线体域网的第$w_k$个节点到第$i$个无线体域网的中心节点的增益
+\item[${\gamma _{ij}^{mp_i}}$] 第$i$个无线体域网的第$j$个节点的信噪比
+\item[$p_{ij}^m$] 移动性场景下的第$i$个无线体域网的第$j$个节点的发送功率
+\item[$\gamma _{ij}^{tar m}$] 移动性场景下第$i$个无线体域网的第$j$个节点的期望信噪比
+\item[$U_{ij}^m$] 移动性场景下第$i$个无线体域网的第$j$个节点的损耗函数
+\item[$\beta_{ij}^m$] 移动性场景下第$i$个无线体域网的第$j$个节点的平衡因子
+\item[$\mathbb{G}_{WBAN}^m$] 移动性场景下的博弈模型
+\item[$W_{WBAN}^m$] 博弈模型$\mathbb{G}_{WBAN}^m$的用户空间
+\item[$A_{WBAN}^m$] 博弈模型$\mathbb{G}_{WBAN}^m$的策略空间
+\item[$\Pi_{WBAN}^m$] 博弈模型$\mathbb{G}_{WBAN}^m$的损耗函数集合
+\item[${\pi^m_i}$] 移动性场景下第$i$个无线体域网的损耗函数
+\item[${\pi _{ij}^m}$] 移动性场景下第$i$个无线体域网的第$j$个传感器节点的损耗函数
+\item[MAPE] 平均绝对值百分比误差(Mean Absolute Percentage Error)
+
+
+\end{denotation}

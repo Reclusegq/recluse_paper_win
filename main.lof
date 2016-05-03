@@ -1,0 +1,75 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces 行为识别基本框架流程图\relax }}{9}{figure.caption.7}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Android全局和设备坐标系\relax }}{11}{figure.caption.9}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces 陀螺仪结构图\relax }}{12}{figure.caption.10}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces 加权平滑滤波\relax }}{14}{figure.caption.11}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces 滑动平均滤波效果图\relax }}{15}{figure.caption.12}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces 决策树分类算法流程图\relax }}{19}{figure.caption.13}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces 两层多策略的行为识别框架流程图\relax }}{22}{figure.caption.14}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces 传感器三维数据的自相关函数\relax }}{24}{figure.caption.16}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {加速度信号的自相关函数}}}{24}{subfigure.2.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {陀螺仪数据的自相关函数}}}{24}{subfigure.2.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces 相同位置下不同行为时数据自相关函数\relax }}{24}{figure.caption.17}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {加速度信号的自相关函数}}}{24}{subfigure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {陀螺仪数据的自相关函数}}}{24}{subfigure.3.2}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces 行走状态下不同位置时数据自相关函数\relax }}{24}{figure.caption.18}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {加速度信号的自相关函数}}}{24}{subfigure.4.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {陀螺仪数据的自相关函数}}}{24}{subfigure.4.2}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces 行为之间的相似度\relax }}{26}{figure.caption.19}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces 陀螺仪的时域信号\relax }}{27}{figure.caption.21}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {周期性站起和坐下时的时域信号}}}{27}{subfigure.6.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {周期性坐下、站起和行走时的时域信号}}}{27}{subfigure.6.2}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces 静态行为分类策略流程图\relax }}{28}{figure.caption.22}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces 动态行为分类策略\relax }}{28}{figure.caption.23}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces 不同位置下各类特征的信息增益排序\relax }}{29}{figure.caption.24}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces 时间窗口示意图\relax }}{34}{figure.caption.32}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces 识别准确率与采样率和采样时间比例的关系\relax }}{35}{figure.caption.33}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {行走状态下的识别准确率}}}{35}{subfigure.2.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {跑步状态下的识别准确率}}}{35}{subfigure.2.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces 50Hz的采样率情况下传感器能耗与时间的关系\relax }}{38}{figure.caption.36}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces 100\%采样时间以及各采样率情况下处理器的数据采集能耗与时间的关系\relax }}{39}{figure.caption.37}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {15Hz采样率情况下的能耗}}}{39}{subfigure.4.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {25Hz采样率情况下的能耗}}}{39}{subfigure.4.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {40Hz采样率情况下的能耗}}}{39}{subfigure.4.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {50Hz采样率情况下的能耗}}}{39}{subfigure.4.4}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {100Hz采样率情况下的能耗}}}{39}{subfigure.4.5}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 处理器数据采集功率与采样率的关系\relax }}{39}{figure.caption.38}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 处理器能耗与时间的关系\relax }}{40}{figure.caption.39}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {50\%的时间比例情况下采集数据时处理器的能耗}}}{40}{subfigure.6.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {处理器控制传感器状态切换时的能耗}}}{40}{subfigure.6.2}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 处理器计算FFT和ACF的能耗与执行次数的关系\relax }}{41}{figure.caption.41}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces 行走状态下的识别准确率与采样率以及采样时间比例之间的关系\relax }}{41}{figure.caption.42}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {实际的行走识别准确率}}}{41}{subfigure.8.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {拟合的行走识别准确率}}}{41}{subfigure.8.2}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces 仅使用时域特征时各行为状态的目标函数\relax }}{42}{figure.caption.44}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {静止状态的目标函数}}}{42}{subfigure.9.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {行走状态的目标函数}}}{42}{subfigure.9.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {跑步状态的目标函数}}}{42}{subfigure.9.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {上楼状态的目标函数}}}{42}{subfigure.9.4}
+\contentsline {subfigure}{\numberline {(e)}{\ignorespaces {下楼状态的目标函数}}}{42}{subfigure.9.5}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces 最佳策略的动态调整方案框图\relax }}{44}{figure.caption.46}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces 对比实验结果\relax }}{46}{figure.caption.49}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {识别准确率}}}{46}{subfigure.11.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {识别能耗}}}{46}{subfigure.11.2}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces 最佳策略的动态调整方案框图\relax }}{47}{figure.caption.50}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces 行为识别应用的部分界面\relax }}{50}{figure.caption.51}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {登录界面}}}{50}{subfigure.2.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {初始化界面}}}{50}{subfigure.2.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces 行为识别应用的部分界面\relax }}{51}{figure.caption.52}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {行为GIF动画展示}}}{51}{subfigure.3.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {历史行为记录展示}}}{51}{subfigure.3.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {菜单选项}}}{51}{subfigure.3.3}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {时间设置对话框}}}{51}{subfigure.3.4}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsfinish 

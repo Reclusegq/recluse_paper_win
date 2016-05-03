@@ -1,0 +1,46 @@
+﻿
+\begin{cnabstract}
+
+人类老年化的进程促使人们把更多的注意力放在了电子健康领域(E-health)，致力于普适医疗、监测、应急报警等于一体的无线体域网(Wireless Body Area Network, WBAN)应运而生。
+无线体域网工作在ISM公用频段上，除了和常见的蓝牙、Zigbee、WiFi等设备共享频段外，更在其大规模部署的医院、社区、车站等环境中面临无线体域网相互之间竞争有限的频谱资源问题。
+传统的基于时分和频分的资源分配策略方案都无法适用于这样的无线体域网密集分布环境下，因为时分复用由于频繁的合作通信分配时隙消耗大量的能量，而频分复用则由于稀缺的频谱资源而面临无信道可分。这些共存策略失效之后，必然存在多个无线体域网占用相同信道同时工作，引发同频干扰问题，使得无线体域网传输的数据面临严重出错的危险，甚至是丢包，这对应用于人体生理数据监测、传输重要健康数据的无线体域网来说是无法容忍的。因此，设计出密集场景下的无线体域网间同频干扰抑制策略对于普适医疗的践行具有重大的意义。
+
+本文针对无线体域网大规模部署的密集应用场景，通过引入博弈论的方法来解决同频干扰问题，将各个无线体域网模拟成博弈参与者，通过调整策略(发送功率)，使得所有共存的无线体域网达到纳什均衡的稳定状态。在分析了无线体域网的内部多链路结构和移动性等重要特征之后，分别提出了基于服务质量(Quality of Service, QoS)功率控制的静止场景下和移动性场景下的无线体域网间同频干扰抑制策略：
+\begin{enumerate}
+  \item 在无线体域网间相对位置不发生改变时，基于无线体域网内部更真实的多链路情景，考虑不同应用节点的异构性QoS需求以及有限的节点能量，构建了基于QoS满意度的功率控制博弈模型。然后对该博弈模型纳什均衡解的存在性进行了证明，并推导出了保证唯一性纳什均衡解的充分条件；为了克服无线体域网间的相互独立性带来的无法获得其他无线体域网的有效信息问题，进而提出了一种纳什均衡解的近似求解算法。仿真结果证明了提出的博弈模型的高效性以及近似纳什均衡解求解算法逼近理论解的有效性。
+  \item 在此基础上，进一步考虑无线体域网固有的社会移动性带来的影响。构建了移动性场景下的功率控制博弈模型，即使移动性使得无线体域网信道增益是个动态变化的值，网间拓扑结构也在实时变化，但是本文构建的博弈模型仍然存在纳什均衡解，并且保证唯一性纳什均衡的条件也被推导出来。最后设计的移动性场景下的收敛性算法能够收敛到稳定的纳什均衡解。
+\end{enumerate}
+
+\keywords{无线体域网，博弈论，功率控制，同频干扰，移动性，异构性，服务质量}
+\end{cnabstract}
+
+\begin{enabstract}
+The aging process of human encouraging people to put more attentions on the e-health field (E-health),
+wireless body area network (Wireless
+Body Area Network, WBAN), which is committed to the universal health care, surveillance, emergency alarms, etc, is designed to transmit the vital physiological signals.
+Wireless body area network occupies the the common ISM band to work, in which apart from the Bluetooth, Zigbee, WiFi and some other wireless devices to share the same band. In some places like hospital, community and other environment where WBANs are largely deployed, there may exists huge coexisted WBANs sharing the same limited spectrum resources to compete with each other devices.
+Some traditional resource allocation policies including time division and frequency division scheme are not suitable for the WBAN densely distributed environments since
+the large consumption of the energy due to the frequent cooperated communication of the time division scheme, and the scarce spectrum resources lead the frequency division scheme to fail because there are not enough channels to arrange.
+Once these coexistence strategies fail, there will appear a plurality of wireless body area network occupying the same channel simultaneously to work, causing co-channel interference and making the data transmitted in the WBAN facing a serious risk of error even loss, which is intolerable due to the important application of WBAN to monitor and transmit the vital health data.
+Therefore, it is significant for universal health care practitioner to design the interference mitigation strategy to overcome the inter-WBAN coexisted interference problems.
+
+In this paper, we focus on the scenario that WBANs are intensively distributed by introducing game theory to solve the problem of co-channel interference. Each WBAN is assumed to be a player of the power control game, and by the means of adjusting the strategy (e.g. transmission power), so that all coexisting WBAN can reach a steady state of Nash equilibrium.
+On the basis of analysis the multiple links structure and mobility of WBAN, we propose the Quality of Service(QoS) driven power control game model to suppress the inter-WBAN interference for the static and mobile scenes separately:
+
+\begin{itemize}
+  \item Focusing on the scene that the relative position of WBANs don't change and a more realistic multiple-link inside the WBAN, we propose a
+ QoS driven power control game to mitigate the interference problem based on the consideration of heterogeneous QoS requirements and the limited energy consumption.
+ Then the existence of at least one Nash Equilibrium of the proposed game is proved and further derive  the sufficient condition to  guarantee the unique NE.
+ In order to overcome the problem lacking of key information for updating the transmission power due to the independence of multi WBANs,
+we further present an non-cooperative approximation algorithm to reach the Nash equilibrium.
+The simulation results of experiment show the correctness and effectiveness of the proposed estimated algorithm of Nash equilibrium.
+
+  \item On this basis of above, we further take the impact of inherent social mobility of WBAN into consideration, and construct
+the power control game model for the mobile scene. Although the signal gain of link and topology structure of inter-network is dynamicly changed for the reason of mobility property of WBAN, but the game proposed by this paper can still exists at least one Nash equilibrium and the uniqueness of Nash equilibrium is also guaranteed.
+Finally, the effectiveness of the MISE algorithm to get the unique Nash equilibrium is proved in the later simulations.
+\end{itemize}
+
+
+
+\enkeywords{Wireless Body Area Network, Game Theory, Power Control, Co-channel Interference, Mobility, Heterogeneity,  Quality of Service}
+\end{enabstract}

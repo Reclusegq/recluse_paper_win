@@ -1,0 +1,430 @@
+﻿
+\chapter{基于QoS 功率控制的无线体域网间同频干扰的抑制}
+\section{引言}
+在无线体域网大规模部署的环境中，如医院、社区、车站等地方，众多的无线体域网随着宿主聚集在一个小区域中工作。由于频谱资源的稀缺，多个无线体域网不得
+不占用相同的信道进行工作，由于通信范围相互重叠，必然出现严重的碰撞和丢包，对于我们的医疗应用来说，后果不堪设想。
+传统的资源分配的方法由于信道资源的不够用，或者频繁的合作通信更新通断信息而使得耗能严重而不适
+于无线体域网，进而出现了同频干扰的抑制策略的研究。广泛的使用了博弈论的策略，把无线体域网当做博弈
+的参与者，而功率改变模拟成策略的调整，通过纳什均衡解的求解来寻求最佳性能的妥协。但是这些基于博弈论
+的无线体域网间同频干扰抑的研究工作，基本都为了简化分析而忽略了无线体域网重要的特征多链路性和异构性
+\scite{kazemi2012reinforcement,kazemi2011dynamic,shin2012game,wang2013cooperative,fang2010distributed,zhang2013interference,kazemi2011novel,yang2012interference}, 事实
+上，无线体域网由于执行不同的监测任务所以会包含多个节点，每个节点由于处于不同的位置链路状况明显不同。并且各个节点任务重要性的不同对QoS 有不同的需求，QoS 需求
+的差异性也不容忽视。
+
+
+因此，本章针对更真实的无线体域网内部为多链路的场景，结合节点的异构性QoS 需求，设计了一种基于QoS 功率控
+制的无线体域网间同频干扰的抑制策略。首先介绍了我们使用的信道衰落模型，然后对无线体域网内部的多链路系统模型参
+数进行了讲解。接着，通过对QoS 满意度和能耗的考虑，设计了基于QoS 保障的功率控制博弈模型。然后利用博弈论性质对该模
+型的纳什均衡解的存在性进行了证明，并且基于压缩理论和不动点理论推导出了保证唯一性纳什均衡解的充分条件。考虑到无线体域
+网的独立性，设计了不依赖于其他无线体域网信息的分布式纳什均衡解收敛性算法，并设置了合理的仿真场景对纳什均衡解求解算法进行
+了仿真，结果显示了该算法的收敛有效性和正确性。
+
+
+\section{模型描述}
+\subsection{系统模型}
+我们考虑的是在医院、老年人社区、车站等人口分布较为密集的场所，无线体域网也伴随着宿主而变得十分稠密的部署；考虑到ISM 频段资源的有限性\scite{lan2002ieee}，无法保证为每一个无线体域网用户分配一个单独的信道进行工作，不可避免的导致多个无线体域网占用相同的物理信道工作,因此，密集场景下的无线体域网间的共存问题演变成了无线体域网间的同频干扰抑制问题。
+
+为了实现更好的抑制无线体域网间的同频干扰，需要对无线体域网的拓扑结构、关键特性、工作模式等进行了解。基于无线体域网真实场景的考虑，可以将每个无线体域网看做是一个星型的网络结构，主要由一个负责协调的中心节点，以及多个负责人体生理信号采集的传感器节点组成，其典型的链路结构图如\autoref{fig:WBANstructure} 所示。
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.6\textwidth]{3_1_jiegoutuopu}
+\figcaption{无线体域网链路结构模型}
+\label{fig:WBANstructure}
+\end{figure}
+
+正因为每个无线体域网内部有多个传感器节点，所以相应的内部的通信链路就有多条，由于人体的身体遮挡效应和所处的位置不同，各条链路的状况是完全不一样的；
+另外，无线体域网内部包含众多传感器节点，对于无线传感器来说，有可能受到邻近无线体域网内部的任何一个传感器节点通信时候带来的干扰，因此，不能简单的将无线体域网作为一个整体来考虑。
+
+对我们的考虑场景进行描述：不失一般性地假设当前共有\(M\)个无线体域网占用相同信道工作，用\({W_m}\)表示第$m$ 个无线体域网，它内部共包含有\(\left\| {{W_m}} \right\|\) 个传感器节点。并且假设各个无线体域网内部通过TDMA 的方式调度节点工作，使得每个传感器节点都无冲突的工作在中心节点分配的时隙里。我们创新性地定义了一个节点同步工作集合\(\emph{\textbf{w}} = \{ {w_1},{w_2}, \cdot  \cdot  \cdot ,{w_m}, \cdot  \cdot  \cdot {w_M}\} \)，表示当前时刻各个无线体域网同时工作的节点构成的集合，其中第$m$ 个无线体域网内部当前时刻是第\({w_m}\) 个传感器节点占用时隙在工作，\({w_m}\) 的取值范围是$1\le w_m \le \Vert{W_m}\Vert$。
+进一步的我们定义了一个节点同步工作集组\(\textbf{\emph{W}}\) 来表示所有的\(\prod\limits_{i = 1}^M {\left\| {{W_i}} \right\|} \) 种节点同步工作集$\emph{\textbf{w}}$ 的集合。当第$i$ 个无线体域网的第$j$ 个节点工作时的节点同步工作集合表示为：${\textbf{\emph{w}}_{ij}} = \{ \textbf{\emph{w}}|{w_i} = j\} $。 此时的第$i$ 个无线体域网的第$j$ 个节点的同步工作集组\(\textbf{\emph{W}}_{ij}\) 表示为$\prod\limits_{k = 1,k \ne i}^M {\left\| {{W_k}} \right\|} $ 种$\textbf{\emph{w}}_{ij}$ 组成。
+
+假设当前第$i$ 个无线体域网的第$j$ 个传感器节点被安排工作，此时第$i$ 个无线体域网的协调器在任意同步工作集合$\textbf{\emph{w}}_{ij}$ 下的接收信噪比可以定义为：
+\begin{equation}
+{\gamma _{ij}}({p_{ij},\textbf{\emph{w}}_{ij}}) = \frac{{{g_{iij}}{p_{ij}}}}{{\sum\limits_{k = 1,k \ne i}^M {{g_{ik{w_k}}}} {p_{k{w_k}}} + {\sigma_{i} ^2}}}
+\label{form31}
+\end{equation}
+\autoref{form31} 中，$p_{ij}$ 表示的是第$i$ 个无线体域网第$j$ 个传感器节点的发送功率，$g_{ik{w_k}}$ 则代表从第$k$ 个无线体域网的第$w_k$ 个传感器节点
+到第$i$ 个无线体域网的中心节点的信道增益大小，在本章研究的静止场景下可以假设是个定值；而第$i$ 个无线体域网的信道白噪声功率表示为\({{\sigma _{i}^2}}\)。
+
+为了达到减轻无线体域网间的干扰实现节点的QoS 保证，我们基于吞吐量和能耗的考虑，对节点的损耗函数进行了设计。吞吐量作为QoS 的非常重要的一个指标，度量着整个网内数据的有效传输情况。目前的利用博弈论来解决无线体域网间同频干扰的研究工作都主要集中在保证能量消耗可接受的同时, 最大化无线体域网的吞吐量
+\scite{zou20144bayesian,kazemi2012reinforcement,kazemi2011dynamic,wang2013cooperative,fang2010distributed,zhang2013interference}，而不管它是否需要那么大的吞吐能力，这就不可避免的造成一定的能量浪费。如某个节点采集和传输身体温度信号，由于传输的数据量很小，数据的重要性也不需要特别保证，所以不需要最大化它的吞吐，而只需要提供能够保证其正常传输所需的能量即可。由于吞吐量和SINR 有直接的函数对应关系，所以我们以SINR为优化目标，即尽可能使无线体域网与自己期望的SINR目标接近,这样就可以避免能量的浪费，因为无线体域网只需要获得自己正常通信所需要的SINR即可，没有必要工作在更高的SINR 的环境下。考虑到无线体域网内部丰富的传感器节点采集和传输不同重要程度的生理信号，所以不同的节点对SINR的要求是不一样的，需要进行SINR的差异化定义。
+而另一方面，在噪声一定的情况下，节点希望得到的SINR越大，则要求无线体域网节点的提供的发送能量越大，而对于电池供电的传感器节点来说，能量是极其有限的，不容许浪费，所以节点损耗函数的设计必须对节点能耗进行约束。
+
+综上分析，我们定义第$i$个无线体域网的第$j$个传感器节点的损耗函数为：
+\begin{equation}
+{U_{ij}}({p_{ij}},{\gamma _{ij}}({p_{ij}},{w_{ij}})) = {(\gamma _{ij}^{tar} - {\gamma _{ij}}({p_{ij}},{\emph{w}_{ij}}))^2} + {\beta _{ij}}{p_{ij}}
+\end{equation}
+由于各个无线体域网间的相互独立性，每个节点都贪婪地想要使自己的损耗函数值最小，都自私地单方面改变自己的发射功率向着自己损耗函数最小的方向进行。
+节点如果不断地提高自己的传输功率来减小自己的损耗势必会使其他节点受到更大的干扰，迫使其他节点也增加自己的发送功率，如此恶性循环导致共存问题并没有得到解决。即对于某个无线体域网来说的最佳策略可能并不是其他无线体域网的最佳选择，这就促使我们引入博弈的模型来对干扰减轻问题进行分析。
+
+
+\subsection{博弈模型}
+在对损失函数设计的基础上，我们引用博弈模型对无线体域网间的干扰问题进行建模分析，无线体域网间的博弈模型如\autoref{boyimoxing}所示：
+\begin{equation}
+{\mathbb{G}_{WBAN}} = \{ {W_{WBAN}},{A_{WBAN}},{\Pi _{WBAN}}\}
+\label{boyimoxing}
+\end{equation}
+
+\begin{itemize}
+  \item \begin{description}
+          \item[] \({W_{WBAN}}\):  Players
+        \end{description}
+
+    表示博弈模型$\mathbb{G}_{WBAN}$的参与者集合，由于本场景中共有$M$个无线体域网，所以\({W_{WBAN}}\)可以表示为$\{W_1,W_2,\cdot \cdot \cdot,W_i,\cdots W_M\}$，其中$W_i$ 表示
+    第$i$个参与者，也就是第$i$个无线体域网，$i \in 1,2 \cdot \cdot \cdot ,M$.
+
+  \item \begin{description}
+          \item[] \({A_{WBAN}}\):  Strategies
+        \end{description}
+
+    表示博弈模型$\mathbb{G}_{WBAN}$的策略空间，由所有参与者策略空间的笛卡尔积组成，记为$A_{WBAN}=\{\times {A_i}\}$，其中，\({A_i}\)代表参与者$W_i$的策略空间，
+    $i \in 1,2 \cdot  \cdot  \cdot M$。由于每个无线体域网都包含多个传感器节点，因此$W_i$的策略空间\({A_i}\)可以进一步由内部的每个传感器节点的策略空间的笛卡尔积
+    组成，记为\({A_i}=\{\times{A_{ij}}\}$, $j \in 1,2
+    \cdot  \cdot  \cdot \Vert{W_i}\Vert\)，其中${A_{ij}}$表示第$i$个参与者的第$j$个传感器节点的策略空间，取值范围为$[0,P_{max}]$，为便于分析，假设该节点的策略为$p_{ij}$。
+
+  \item \begin{description}
+          \item[] \({\Pi _{WBAN}}\):  Cost functions
+        \end{description}
+
+  表示博弈模型$\mathbb{G}_{WBAN}$的损失函数的集合，由上述的$M$个参与者的损失函数组成，表示为$\Pi_{WBAN}=\{\pi_{1},\pi_2, \cdot \cdot \cdot,\pi_M\}$，
+  其中$\pi_i$表示第$i$个参与者的损失函数，其第$j$个节点的损失函数可进一步表示为\( {\pi _{ij}}\)。 由于无线体域网内部各个节点应用的不同，发送的数据量大小不一，
+  统计来看他们占用着不同长度的时隙工作，所以我们可以定义第$i$个无线体域网的第$j$个节点的传输概率为$P{r_i}(j)$。考虑到各个无线体域网的相互独立性，在同步工
+  作集合$\textbf{\emph{w}}_{ij}$下工作的联合概率可表示为\(P{r_{ - i}}({\textbf{\emph{w}}_{ij}})=\prod\limits_{k = 1,k \ne i}^M {P{r_k}({w_k})}\)，因此可以定义
+  第$i$个无线体域网的损失函数${\pi _i}$为第$i$个无线体域网内的所有节点的期望损失函数之和，表示如下：
+\begin{equation}
+{\pi _i}(\emph{\textbf{P}}) = \sum\limits_{j = 1}^{\left\| {{W_i}} \right\|} {P{r_i}(j){\pi _{ij}}(\textbf{\emph{P}})} \label{equ:31}
+\end{equation}
+\begin{equation}
+{\pi _{ij}}(\textbf{\emph{P}}) = \sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {{U_{ij}}({p_{ij}},{\gamma _{ij}}({p_{ij}},{\textbf{\emph{w}}_{ij}}))P} {r_{ - i}}({\textbf{\emph{w}}_{ij}}) \label{equ:32}
+\end{equation}
+其中，$P = \{ {p_{11}},{p_{12}}, \cdot  \cdot  \cdot ,{p_{1\left\| {{W_1}} \right\|}},{p_{21}},{p_{22}}, \cdot  \cdot  \cdot ,{p_{2\left\| {{W_2}} \right\|}}, \cdot  \cdot  \cdot ,{p_{M\left\| {{W_M}} \right\|}}\}$ 表示为所有节点的传输功率集合。
+\end{itemize}
+
+功率控制博弈$\mathbb{G}_{WBAN}$的解可以表示为
+$\emph{\textbf{P}}^*=[p_{11}^*,p_{12}^*, \cdot \cdot \cdot p_{1\Vert{W_1}\Vert}^*,p_{21}^*,p_{22}^*,\cdot \cdot \cdot p_{2\Vert{W_2}\Vert}^*\cdot \cdot \cdot  p_{M\Vert{W_M}\Vert}^*]$，
+即纳什均衡解，如果所有博弈参与者均以这个策略工作，都能获得当前共存情况下的最满意的性能。
+
+
+由于节点的传输概率都是正值，根据凸优化定理，最小化\autoref{equ:31} 等价于最小化\autoref{equ:32}，因此我们进一步可以定义类似的节点博弈模型$\mathbb{G}_{node}=\{W_{node},A_{node},{\Pi}_{node}\}$，
+其中博弈的参与者集合$W_{node}$由所有的传感器节点构成，并且第$i$个无线体域网的第$j$个传感器节点可以表示为$W_{ij}$；而$A_{node}$ 则表示博弈模型$\mathbb{G}_{node}$的策略
+空间集合，由所有节点的策略空间的笛卡尔积组成，简记为$A_{node}=\{\times {A_{ij}}\}$, $j \in 1,2 \cdot  \cdot  \cdot \Vert{W_i}\Vert$，最后博弈模型$\mathbb{G}_{node}$
+的损失函数集合${\Pi}_{node}$则由所有节点的损失函数构成。
+
+
+
+\section{纳什均衡解分析}
+通过将无线体域网间的共存干扰问题模拟成一个无合作的节点博弈问题，通过节点不断调整自己的发射功率使得所有博弈的参与者功率调整过程能够收敛到一个稳定的状态，这就是博弈的纳什均衡解，即每个节点都保证自己性能的同时给别人带来最小干扰的最佳选择策略。
+在本节中我们对节点博弈模型$\mathbb{G}_{node}$的纳什均衡解的存在性和唯一性进行了讨论，证明了该博弈纳什均衡解的存在性，并且推导了保证其解的唯一性的充分条件。
+纳什均衡解的存在性和唯一性分析有助于设计出高效的纳什均衡解求解算法,下面分别述之。
+
+
+
+\subsection{纳什均衡解的存在性分析}
+
+\begin{theorem}
+${\mathbb{G}_{node}}$ 博弈至少拥有一个纳什均衡解。
+\end{theorem}
+\begin{proof}
+    \begin{definition}
+    \(p_{ij}^ * \) 是${\mathbb{G}_{node}}$ 博弈的一个纳什均衡解当且仅当 :
+    \begin{equation}
+    p_{ij}^ *  \in \arg \mathop {\min }\limits_{{p_{ij}}} {\pi _{ij}}({p_{ij}},\textbf{P}_{ - \{ {p_{ij}}\} }^*)
+    \end{equation}
+    对于${\mathbb{G}_{node}}$ 博弈内的任意参与者都成立。
+    \end{definition}
+
+    证明主要是通过对损失函数求二阶偏导得：
+     \begin{equation}
+        \frac{{\partial \pi _{ij}^2({p_{ij}},{\textbf{\emph{P}}_{ - \{ {p_{ij}}\} }})}}{{\partial p_{ij}^2}} = 2\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\emph{\textbf{W}}_{ij}}} {{{\left( {\frac{{\partial {\gamma _{ij}}({p_{ij}},{\textbf{\emph{w}}_{ij}})}}{{\partial {p_{ij}}}}} \right)}^2}P{r_{ - i}}({\textbf{\emph{w}}_{ij}})}
+        \label{theorem1_3_6}
+    \end{equation}
+
+根据博弈论定理\scite{fudenberg1991game,berinde2007iterative}，策略空间是欧氏空间中的非空、有界、闭凸集合，且损失函数的偏导数是凸的，则该博弈至少存在一个纯策略纳什均衡解。
+\end{proof}
+
+\subsection{纳什均衡解的唯一性分析}
+\begin{theorem}
+${\mathbb{G}_{node}}$ 博弈纳什均衡解是唯一的，只要条件：
+ \begin{equation}
+ \frac{{\gamma _{ij}^{tar}{I_{ij}}}}{{2{g_{iij}}}} - \frac{{{I_{ij}}}}{{2\sum\limits_{m = 1,m \ne i}^M {{g_{im{w_m}}}} }} < {p_{ij}} \le \frac{{\gamma _{ij}^{tar}{I_{ij}}}}{{2{g_{iij}}}}
+ \label{nidaye}
+ \end{equation}
+对于任意的参与者均成立，其中 \({I_{ij}} = \sum\limits_{k = 1,k \ne i}^M {{g_{ik{w_k}}}{p_{k{w_k}}} + } {\sigma _i}^2\)。
+\end{theorem}
+证明之前，对一些证明需要的概念进行介绍。首先引入最佳响应(Best Response) 的概念，对于${\mathbb{G}_{node}}$ 博弈来说，参与者$W_{ij}$ 的最佳响应是指在其他参与者的策略固定的情况下，通过调整自己的策略，使自己损耗最小时的策略值；分析节点的损耗函数$\pi_{ij}$，可以发现它是一个凸函数，所以损耗的最小值一般可以通过一阶导数得到。我们可以定义参与者$W_{ij}$ 的最佳响应为：\(R_{i}({\textbf{\emph{P}}}) = arg\mathop {min}\limits_{{p_{ij}}} \{ {\pi _{ij}}({p_{ij}},{\emph{\textbf{P}}_{ - \{ {p_{ij}}\} }})\}\)；进一步博弈${\mathbb{G}_{node}}$ 所有参与者的最佳响应映射(Best Response Mapping) 被定义为：\(\overline R (\textbf{\emph{P}}) = [{R_1}(\textbf{\emph{P}}),{R_2}(\textbf{\emph{P}}), \cdot  \cdot  \cdot ,{R_N}(\textbf{\emph{P}})]\)，其中$N$ 等于${\sum\limits_{i = 1}^M {\left\| {{W_i}} \right\|} }$，表示所有的参与者个数。
+另一个重要的概念就是压缩(Contraction)，根据文献\scite{khalil1996nonlinear}可以知道，如果一个映射(Mapping) 满足条件\({\left\| {\overline R ({\textbf{\emph{P}}_1}) - \overline R ({\textbf{\emph{P}}_2})} \right\|_1} \le \alpha {\left\| {{\textbf{\emph{P}}_1} - {\textbf{\emph{P}}_2}} \right\|_1},\alpha  < 1,\forall {\textbf{\emph{P}}_1},{\textbf{\emph{P}}_2}\)，那么这就是一个压缩映射。
+\begin{lemma}
+如果在非空完备空间中最佳响应映射是压缩的，则博弈中必存在唯一的一个纳什均衡解。
+\label{lemma1}
+\end{lemma}
+\begin{proof}
+引理的证明可以参考定理4\scite{cachon2004game}。 根据角谷不动点定理\scite{berinde2007iterative}，在非空完备空间中的压缩映射一定存在一个唯一的不动点，而在博弈过程中，最佳响应的不动点就是纳什均衡解，详细论证见\scite{fudenberg1991game}。
+\end{proof}
+\begin{proof}
+   根据引理\autoref{lemma1}, 我们只需要证明博弈参与者的策略最佳响应是压缩的，就可以保证博弈有唯一的纳什均衡解。根据文献\scite{cachon2004game} 定理5可知，我们可以通过对最佳响应映射求二阶偏导得到海森伯格矩阵(Hessian), 如\autoref{theorem1_3_7} 所示:
+\begin{equation}
+\left|\begin{array}{*{20}{c}}
+{\frac{{\partial \pi _{11}^2({p_{11}},{\textbf{\emph{P}}_{ - \{ {p_{11}}\} }})}}{{\partial p_{11}^2}}}&{\frac{{\partial \pi _{11}^2({p_{11}},{\textbf{\emph{P}}_{ - \{ {p_{11}}\} }})}}{{\partial {p_{11}}\partial {p_{12}}}}}& \cdots &{\frac{{\partial \pi _{11}^2({p_{11}},{\textbf{\emph{P}}_{ - \{ {p_{11}}\} }})}}{{\partial {p_{11}}\partial {p_{M(\left\| {{W_m}} \right\| - 1)}}}}}&{\frac{{\partial \pi _{11}^2({p_{11}},{\textbf{\emph{P}}_{ - \{ {p_{11}}\} }})}}{{\partial {p_{11}}\partial {p_{M\left\| {{W_m}} \right\|}}}}}\\
+{\frac{{\partial \pi _{12}^2({p_{12}},{\textbf{\emph{P}}_{ - \{ {p_{12}}\} }})}}{{\partial {p_{12}}\partial {p_{11}}}}}&{\frac{{\partial \pi _{12}^2({p_{12}},{\textbf{\emph{P}}_{ - \{ {p_{12}}\} }})}}{{\partial p_{12}^2}}}& \cdots &{\frac{{\partial \pi _{12}^2({p_{12}},{\textbf{\emph{P}}_{ - \{ {p_{12}}\} }})}}{{\partial {p_{12}}\partial {p_{M(\left\| {{W_m}} \right\| - 1)}}}}}&{\frac{{\partial \pi _{12}^2({p_{12}},{\emph{\textbf{P}}_{ - \{ {p_{12}}\} }})}}{{\partial {p_{12}}\partial {p_{M\left\| {{W_m}} \right\|}}}}}\\
+ \vdots & \vdots & \ddots & \vdots & \vdots \\
+{\frac{{\partial \pi _{M(\left\| {{W_m}} \right\| - 1)}^2}}{{\partial {p_{M(\left\| {{W_m}} \right\| - 1)}}\partial {p_{11}}}}}&{\frac{{\partial \pi _{M(\left\| {{W_m}} \right\| - 1)}^2}}{{\partial {p_{M(\left\| {{W_m}} \right\| - 1)}}\partial {p_{1{\rm{2}}}}}}}& \cdots &{\frac{{\partial \pi _{M(\left\| {{W_m}} \right\| - 1)}^2}}{{\partial p_{M(\left\| {{W_m}} \right\| - 1)}^2}}}&{\frac{{\partial \pi _{M(\left\| {{W_m}} \right\| - 1)}^2}}{{\partial {p_{M(\left\| {{W_m}} \right\| - 1)}}\partial {p_{M\left\| {{W_m}} \right\|}}}}}\\
+{\frac{{\partial \pi _{M\left\| {{W_m}} \right\|}^2}}{{\partial {p_{M\left\| {{W_m}} \right\|}}\partial {p_{{\rm{11}}}}}}}&{\frac{{\partial \pi _{M\left\| {{W_m}} \right\|}^2}}{{\partial {p_{M\left\| {{W_m}} \right\|}}\partial {p_{1{\rm{2}}}}}}}& \cdots &{\frac{{\partial \pi _{M\left\| {{W_m}} \right\|}^2}}{{\partial {p_{M\left\| {{W_m}} \right\|}}\partial {p_{M(\left\| {{W_m}} \right\| - 1)}}}}}&{\frac{{\partial \pi _{M\left\| {{W_m}} \right\|}^2}}{{\partial p_{M\left\| {{W_m}} \right\|}^2}}}
+\end{array}\right|
+\label{theorem1_3_7}
+\end{equation}
+
+为了实现定理证明，需要使得海森伯格矩阵的行主对角占优，即：
+\begin{equation}
+\sum\limits_{m = 1}^M {\sum\limits_{\scriptstyle{w_m} = 1\atop
+\scriptstyle if\;m = i,{w_m} \ne j}^{\left\| {{W_m}} \right\|} {\left| {\frac{{\partial \pi _{ij}^2({p_{ij}},{\textbf{\emph{P}}_{ - \{ {p_{ij}}\} }})}}{{\partial {p_{ij}}\partial {p_{m{w_m}}}}}} \right| < \frac{{\partial \pi _{ij}^2({p_{ij}},{\emph{\textbf{P}}_{ - \{ {p_{ij}}\} }})}}{{\partial p_{ij}^2}}} }
+\label{zhuduijiaozhanyou}
+\end{equation}
+
+    主要关键步骤如下：
+
+第$i$ 个无线体域网的第$j$ 个传感器节点的一阶导数为：
+\begin{equation}
+\frac{{\partial {\pi _{ij}}({p_{ij}},{\emph{\textbf{P}}_{ - \{ {p_{ij}}\} }})}}{{\partial {p_{ij}}}}{\rm{ = }}2\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {({\gamma _{ij}}({p_{ij}},{\textbf{\emph{w}}_{ij}}) - \gamma _{ij}^{tar})\frac{{\partial {\gamma _{ij}}({p_{ij}},{\textbf{\emph{w}}_{ij}})}}{{\partial {p_{ij}}}}P{r_{ - i}}({\textbf{\emph{w}}_{ij}})}
+\label{yijiedaoshu1}
+\end{equation}
+
+第$i$ 个无线体域网的第$j$ 个传感器节点的二阶导数如\autoref{theorem1_3_6} 所示,二阶偏导则在$i \ne m$ 时为：
+\begin{equation}
+\frac{{\partial \pi _{ij}^2({p_{ij}},{\textbf{\emph{P}}_{ - \{ {p_{ij}}\} }})}}{{\partial {p_{ij}}\partial {p_{m{w_m}}}}}{\rm{ = 2}}\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {(\frac{{\gamma _{ij}^{tar}{g_{im{w_m}}}{g_{iij}}}}{{I_{ij}^3}} - \frac{{2{p_{ij}}{g_{im{w_m}}}g_{iij}^2}}{{I_{ij}^2}})P{r_{ - i}}({\textbf{\emph{w}}_{ij}})}
+\label{weiyi1}
+\end{equation}
+
+二阶偏导在$i=m$ 时为：
+\begin{equation}
+\frac{{\partial \pi _{ij}^2({p_{ij}},{\textbf{\emph{P}}_{ - \{ {p_{ij}}\} }})}}{{\partial {p_{ij}}\partial {p_{m{w_m}}}}} = 0,{\kern 1pt} {\kern 1pt} {w_m} \ne j
+\label{weiyi2}
+\end{equation}
+
+将\autoref{theorem1_3_6},\autoref{weiyi1} 和\autoref{weiyi2} 带入\autoref{zhuduijiaozhanyou}, 化简可以进一步得到需要满足的式子：
+
+\begin{equation}
+\resizebox{0.9\hsize}{!}{$\sum\limits_{m = 1}^M {\sum\limits_{\scriptstyle{w_m} = 1,\atop
+{\scriptstyle if{\kern 1pt} m = i,\atop
+\scriptstyle{w_m} \ne j}}^{\left\| {{W_m}} \right\|} {|2\sum\limits_{{\textbf{\emph{w}}_{ij}} \in {\textbf{\emph{W}}_{ij}}} {\frac{{{{Pr }_{ - i}}({\textbf{\emph{w}}_{ij}})}}{{I_{ij}^3}}} } } (\gamma _{ij}^{tar}{g_{im{w_m}}}{g_{iij}}{I_{ij}} - 2{g_{im{w_m}}}g_{iij}^2{p_{ij}})| < \frac{{\partial \pi _{ij}^2({p_{ij}},{\textbf{\emph{P}}_{_{ - \{ {p_{ij}}\} }}})}}{{\partial p_{ij}^2}} $}\label{33333}
+\end{equation}
+
+
+分析\autoref{33333} 两边的内容，我们可以发现\autoref{33333} 两边的式子都包含有当前分析用户$W_{ij}$ 的所有同步工作集的内容项，不难得出，保证\autoref{33333} 成立的一个充分条件就是使得用户$W_{ij}$ 的每一个同步工作集都有上面的小于关系成立。因此，从\autoref{33333} 两边取出属于用户$W_{ij}$ 的任意一个同步工作集$\textbf{\emph{w}}_{ij}$ 的内容项，保持式子的符号关系不变，得到使得\autoref{33333} 成立的充分条件如下所示：
+\begin{equation}
+\sum\limits_{\scriptstyle m = 1\hfill\atop
+\scriptstyle m \ne i\hfill}^M {\left| {(\gamma _{ij}^{tar}{g_{im{w_m}}}{g_{iij}}{I_{ij}} - 2{g_{im{w_m}}}g_{iij}^2{p_{ij}})\frac{{{{\Pr }_{ - i}}({w_{ij}})}}{{I_{ij}^3}}} \right|}  < \frac{{g_{iij}^2{{\Pr }_{ - i}}({w_{ij}})}}{{I_{ij}^2}}
+\label{2121}
+\end{equation}
+为了使得\autoref{2121} 成立，可以适当放松\autoref{2121} 左边的条件，一个充分的条件就是假设绝对值符号里面的内容恒为正或者恒为负，从而打开绝对值符号，达到化简的目的。因此我们可以最终得到保证${G_{node}}$ 博弈拥有唯一性纳什均衡解的充分条件如\autoref{nidaye} 所示。
+
+我们进一步对得到的唯一性条件是否容易被满足进行分析，\autoref{nidaye} 可以进一步变形为：
+\begin{equation}
+\frac{{\gamma _{ij}^{tar}}}{{2{g_{ij}}}} - \frac{1}{{2\sum\limits_{m = 1,m \ne i}^M {{g_{im{w_m}}}} }} < \frac{{{p_{ij}}}}{{{I_{ij}}}} < \frac{{\gamma _{ij}^{tar}}}{{2{g_{ij}}}}
+\end{equation}
+
+
+因为来自于其他干扰无线体域网的节点到本体域网中心节点的距离比无线体域网内部的其他节点到中心节点的距离大很多，因此根据增益模型得到的同一个同步工作集的其他节点的增益之和\({\sum\limits_{k = 1,k \ne i}^M {{g_{i{w_k}}}} }\) 肯定小于$g_{ij}$, 这样左边项$\frac{{\gamma _{ij}^{tar}}}{{2{g_{ij}}}} - \frac{1}{{2\sum\limits_{m = 1,m \ne i}^M {{g_{im{w_m}}}} }} $相对比较小，而右边项$\frac{{\gamma _{ij}^{tar}}}{{2{g_{ij}}}}$则比较大，
+并且\(\frac{1}{{2\sum\limits_{m = 1,m \ne i}^M {{g_{im{w_m}}}} }}\) 项可以极大地扩大了发送功率的选择范围，所以唯一性纳什均衡的条件是很容易满足的。
+\end{proof}
+
+
+
+
+
+
+\section{纳什均衡解的求解算法设计}
+我们前面已经对纳什均衡解的存在性进行了证明，并且推导出了保证唯一性纳什均衡解的充分性条件。本节中我们将设计合适的算法得到唯一性的纳什均衡解，通过前面的\textbf{定理3.3.2}
+的分析可知，不断通过求最佳响应的方式可以得到最终的纳什均衡解，因此根据\autoref{yijiedaoshu1},我们可以得到在协调器处对第$i$个无线体域网的第$j$个节点$W_{ij}$的功率更新公式为：
+\begin{equation}
+{p_{ij}} = \frac{{\sum\limits_{\textbf{\emph{w}}_{ij} \in \textbf{\emph{W}}_{ij}} {\frac{{{g_{iij}}\gamma _{ij}^{tar}}}{{{I_{ij}}}}P{r_{ - i}}({\textbf{\emph{w}}_{ij}})  - {\beta _{ij}/2}} }}{{\sum\limits_{\textbf{\emph{w}}_{ij} \in \textbf{\emph{W}}_{ij}} {{{\left( {\frac{{{g_{iij}}}}{{{I_{ij}}}}} \right)}^2}P{r_{ - i}}({\textbf{\emph{w}}_{ij}}) } }}
+\end{equation}
+从功率更新公式中可以发现，功率更新需要节点知道诸多信息。第$i$个无线体域网的中心节点能够通过无线体域网内部的传输获得$g_{iij}$, $\gamma _{ij}^{tar}$, $\beta _{ij}$，但是
+却由于不同无线体域网之间的相互独立性而无法获得干扰值$I_{ij}$和联合概率$P{r_{ - i}}({\textbf{\emph{w}}_{ij}})$，考虑到不同无线体域网间的天然的独立工作方式，我们提出无合作的
+干扰分段估计算法(Interference Segment Estimate, ISE)，在不需要$I_{ij}$和$P{r_{ - i}}({\textbf{\emph{w}}_{ij}})$的前提下，能够获得${\mathbb{G}_{node}}$ 博弈纳什均衡解的近似值。
+
+在干扰分段估计算法中，中心节点不需要直接获得其他无线体域网的传输功率和传输概率，而只需要利用中心节点接收到的历史干扰信息直方图\scite{maini2010comprehensive}来估计出$I_{ij}$和
+$P{r_{ - i}}({\textbf{\emph{w}}_{ij}})$。历史干扰信息直方图通过统计落入不同相邻的干扰等级的干扰值个数来估计上述两个参数值.假设每个中心节点保留的历史干扰信息值长度为
+$RHI$ (Received Historical Interference, RHI)个，并且总共的干扰等级个数为$IL$ (Interference Level, IL)个,所以中心节点处的保留的历史干扰值可以分为$IL$个不同的等级，第
+$k$段的干扰值大小可以记为$I_{ij}(k)$，与之相关的联合概率密度为$Pr(I_{ij}(k))$, $k \in 1,2 \cdot  \cdot  \cdot I\!L$, 可分别通过利用干扰直方图对落入第$k$段的干扰值取平均和
+计算落入第$k$段的干扰值个数占总的干扰值的比例得到。所以经过干扰直方图估计后的功率更新公式可以记为：
+\begin{equation}
+{p_{ij}} = \frac{{\sum\limits_{k = 1}^{I\!L} {{g_{iij}}\gamma _{ij}^{tar}\frac{{\Pr ({I_{ij}}(k))}}{{{I_{ij}}(k)}}}  - \frac{{{\beta _{ij}}}}{2}}}{{\sum\limits_{k = 1}^{I\!L} {g_{_{iij}}^2\frac{{\Pr ({I_{ij}}(k))}}{{{{({I_{ij}}(k))}^2}}}} }}
+\label{319}
+\end{equation}
+在每个$W_{ij}$被分配进行工作的时隙，就会以此更新后的公式进行工作，详细的干扰分段估计算法见\autoref{algodisjdecomp}所示。
+\IncMargin{1em}
+\begin{algorithm}[!htb]
+\BlankLine
+\emph{ 如果$W_{ij}$ 在$t$ 时刻没有被安排工作，就不进入算法进行功率更新；否则第$i$ 个无线体域网的协调器初始化$R\!H\!I$， $I\!L$，${\gamma _{ij}^{tar}}$， ${{g_{iij}}}$， ${\beta _{ij}}$，当前传输功率$p_{ij}^t$，当前接收信号强度$S_{ij}^{t}$ 和历史保存的干扰序列$I_i^{arr}$:
+\begin{displaymath}
+I_i^{arr} = \left\{ \begin{array}{ll}
+\{I_i^{t-1}, I_i^{t-2} \cdots I_i^{1}\} & \textrm{if $t < R\!H\!I$}\\
+\{I_i^{t-1}, I_i^{t-2} \cdots I_i^{t-R\!H\!I+1}\} & \textrm{if $t \ge R\!H\!I$}\\
+ \end{array} \right.
+\end{displaymath}}\\
+\emph{计算第$i$ 个无线体域网的协调器收到的干扰值：$ I_{i}^{t}=S_{ij}^{t}-{{p_{ij}^{t}}}\times{{g_{iij}}}$}\\
+\emph{计算干扰值分段间隔：\({I_{base}} = (\max \{ I_i^t, I_i^{arr}\} - \min \{ I_i^t, I_i^{arr}\}) /I\!L\)}\\
+\emph{对$I_{ij}(k)$和$Pr(I_{ij}(k))$, $k \in 1,2 \cdot  \cdot  \cdot I\!L$} 进行估计：\\
+\emph{$ I_i^{min}= \min \{ I_i^t, I_i^{arr}\}$}\\
+\emph{$tt$=$t-R\!H\!I$+1}\\
+\If{$ t < R\!H\!I$}
+{$\  tt$=1}
+\For{$kk=tt$ \KwTo $t$}{
+\For{$kkk=1$ \KwTo $I\!L$}{
+\If{$I_i^{kk}-I_i^{min} > (kkk-1)*I_{base}$ and $I_i^{kk}-I_i^{min} \le kkk*I_{base}$}
+{第$kkk$段的干扰个数加一：$Count(kkk)$++,\\
+ 第$kkk$ 段的干扰值累加：$Interference(kkk)+=I_i^{kk}$;
+}
+}}
+\For{$k=1$ \KwTo $I\!L$}{
+    第$k$ 段的干扰值大小为：$I_{ij}(k)$=$Interference(k)$/$Count(k)$\\
+    第$k$ 段干扰值的概率为：$Pr(I_{ij}(k))$=$Count(k)$/$R\!H\!I$\\
+}
+\emph{利用\autoref{319}进行用户$W_{ij}$ 计算进行功率的更新}\\
+\emph{$t=t+1$，跳转到第2 步继续执行算法}\\
+\caption{Interference Segmentation Estimate (ISE) algorithm}
+\label{algodisjdecomp}
+\end{algorithm}\DecMargin{1em}
+
+\section{仿真实验}
+
+为了验证我们提出的基于QoS保障的功率控制博弈模型的有效性，以及提出的博弈模型的求解算法——干扰分段估计算法的有效性进行实验分析，我们进行了本章的仿真实验。
+首先介绍了本章实验仿真场景的设置，在此基础上依次进行了4组实验，包括通过干扰分段估计算法和理想算法的收敛性对比试验来验证提出的算法收敛的有效性；分析了干扰分段估计
+算法中重要的两个参数$RHI$和$IL$对算法收敛性能带来的影响；还分析了QoS满意度和能耗的平衡因子$beta$的调节作用，最后分析了本文提出的基于QoS保障的功率控制博弈模型相对于其他
+普通博弈模型在QoS保障方面的优势，详述如下。
+
+
+\subsection{实验场景设置}
+
+为了对我们设计的纳什均衡解求解算法——ISE算法进行性能分析，我们首先设置了本节实验的仿真参数。
+将$3$个无线体域网部署在$5*5*5$m的这样一个空间中，并且假设$3$个无线体域网由于频率资源的限制而工作在同一个信道上面，其中
+每个无线体域网由一个协调器节点和三个传感器节点组成，每个传感器节点由于不同的应用需求而被安放在不同的身体位置上拥有不同的QoS需求，并且由于数据量
+传输的大小不同而拥有不同的传输概率。我们假定每个节点的最大传输功率为$0$dBm,还假设信道的最大背景白噪声为$-85$dBm。对ISE算法中两个关键参数：用于
+干扰估计的历史干扰存储长度$RHI$和干扰估计的段数$IL$，分别设置为$50$和$10$，详细的参数配置见\autoref{tab:shiyan11}所示。
+\begin{table}[!htb]
+\centering
+\caption{实验1仿真参数设置}
+\label{tab:shiyan11}
+\tabcolsep 10pt %space between two columns. 用于调整列间距
+\begin{tabular}{c c}
+\hline
+系统参数列表 & 参数取值 \\
+\hline
+\multirow{2}{*}{节点位置:WBAN1=\{N1,N2,N3,C\}} &\{(0.20, 0.35, 0.50), (0.22, 0.33, 0.70), \\
+&(0.34, 0.42, 1.40), (0.30, 0.40, 0.87)\} (m)\\
+\multirow{2}{*}{节点位置:WBAN2=\{N1,N2,N3,C\}} &\{(2.15, 1.50, 0.60), (2.10, 1.42, 1.00), \\
+&(2.15, 1.45, 1.50), (2.20, 1.50, 1.00)\} (m)\\
+\multirow{2}{*}{节点位置:WBAN3=\{N1,N2,N3,C\} }&\{(0.86, 3.50, 0.70), (0.83, 3.40, 1.50), \\
+&(0.91, 3.65, 1.50), (0.90, 3.60, 0.90)\} (m)         \\
+传输概率：WBAN1=\{N1,N2,N3\}& [0.50, 0.25, 0.25]\\
+传输概率：WBAN2=\{N1,N2,N3\}& [0.40, 0.50, 0.10]\\
+传输概率：WBAN3=\{N1,N2,N3\}& [0.30, 0.40, 0.30]\\
+目标信噪比：WBAN1=\{N1,N2,N3\}& [4.20, 3.80, 4.10]\\
+目标信噪比：WBAN2=\{N1,N2,N3\}& [4.00, 4.20, 4.00]\\
+目标信噪比：WBAN3=\{N1,N2,N3\}& [4.20, 4.30, 4.40]\\
+信道模型   &  自由空间传播模型\scite{takizawa2008channel}\\
+节点调节因子：beta &  9\\
+信道噪声：noise& -85dBm\\
+RHI&50\\
+IL&10\\
+节点传输功率&[0,1](mw)\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{实验结果分析}
+
+为了进行ISE算法的收敛性能分析，我们设计了一种理想的收敛算法，顾名思义，每个无线体域网可以在每轮功率更新的时候相互通信，交换功率更新必要的一些其他无线体域网的传输
+信息，这样节点就可以进行正常的功率更新，得到的功率收敛值就是理论上的纳什均衡解。为了克服无线体域网间的无合作性而设计的ISE算法能够得到纳什均衡解的估计值，
+通过将ISE算法和该理想的算法进行功率收敛性过程对比，判断我们设计的ISE非合作算法的性能好坏。
+因此，我们引入了两种算法之间的功率平均绝对值百分比误差(Mean Absolute Percentage Error, MAPE),而MAPE的定义为
+\begin{equation}
+MAPE = \frac{1}{9}\sum\limits_{i = 1}^3 {\sum\limits_{j = 1}^3 {\frac{{\left| {p_{ij}^{Cooperate} - p_{ij}^{ISE}} \right|}}{{p_{ij}^{Cooperate}}}} }
+\end{equation}
+其中，$p_{ij}^{ISE}$ 和 $p_{ij}^{Cooperative}$ 分别是 $W_{ij}$在ISE算法和理想算法中的传输功率。
+
+我们首先进行了ISE算法和理想算法的功率和损耗的收敛性对比试验，实验结果如\autoref{fig:WBANutilityjingzhi}和\autoref{fig:WBANpowerjingzhi}所示。我们在对比图中画出了
+$3$个无线体域网的$9$个传感器节点的功率和损耗收敛情况。从图中我们可以发现，
+理想的算法随着迭代的进行能够迅速的收敛到纳什均衡解，而ISE算法则是缓慢的收敛到类似的结果。
+因为缺乏其他无线体域网的精确的传输信息，而采用接收的历史干扰值来进行估计，所以ISE算法在收敛速度上会比较慢，但是仍然会不断的接近理想算法的收敛值。
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1\textwidth]{ustc_paper1_utility_convergence}
+\figcaption{静止场景下ISE 算法和理想算法的损耗收敛曲线对比图}
+\label{fig:WBANutilityjingzhi}
+\end{figure}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=1\textwidth]{ustc_paper1_power_convergence}
+\figcaption{静止场景下ISE 算法和理想算法的功率收敛曲线对比图}
+\label{fig:WBANpowerjingzhi}
+\end{figure}
+
+为了进一步的对比ISE算法和理想算法的收敛结果，我们利用功率MAPE对ISE算法和理想算法在收敛稳定后的功率值进行了对比分析。
+我们设置了6组对比试验，各组中心节点处保留的历史干扰值个数$RHI$分别为$5$，$10$，$20$，$50$，$100$，$150$，试验中通过固定$RHI$值，不断增大干扰分段数$IL$来计算
+两种算法收敛后的功率值MAPE，并将最后的统计结果画出来如\autoref{fig:WBANrhijingzhi}所示。
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{ustc_paper1_il_mape_power}
+\figcaption{静止场景下功率MAPE 与干扰段数IL 和利用的历史数据长度RHI 的关系图}
+\label{fig:WBANrhijingzhi}
+\end{figure}
+从统计结果可以看出，在相同的干扰等级$IL$下，随着$RHI$的逐渐增大，功率MAPE在逐渐减小，因为中心节点可以利用更多的历史干扰信息对干扰大小和干扰的联合概率进行估计，
+能够使得功率的估计变得更准确，但同时保留更多的干扰值也增加了中心节点的存储负担。
+在$RHI$达到$100$之后，功率MAPE的下降效果已经不明显，此时的ISE算法和理想算法之间的收敛误差在$0.5\%$左右。
+另一方面，在相同的保留历史干扰值个数$RHI$下，$IL$越大，功率MAPE的值则越小，因为干扰的间隔分的越精细，使得对干扰和联合概率拟合得越准确，与$RHI$增大类似的，在$IL$增大到
+一定时候，MAPE的下降效果已经不明显了。此时增加$IL$还会不断加大计算量，因此选择一个合适的$RHI$和$IL$即可获得综合满意的性能。
+
+在接下来我们分析了博弈模型中用来平衡QoS满意度和能耗的平衡参数$\beta$的调节效果，一共设置了5组$\beta$参数，分别是$0$,$5$,$10$,$15$,$20$，统计在$\beta$设置不同
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{ustc_paper1_beta}
+\figcaption{静止场景下价值参数对平均功率和平均信噪比误差的影响对比图}
+\label{fig:duibijingzhi}
+\end{figure}
+值的时候每个无线体域网在各自节点都到达稳定状态后，无线体域网内部节点的平均功耗值和SINR与期望SINR之间的平均绝对值误差，结果如\autoref{fig:duibijingzhi}所示。
+从图中可以发现，当$\beta$设置为0的时候，节点的传输功率不收限制，所有无线体域网的节点都能随意调整自己的功率来获得自己最满意的SINR误差值，但是随着$\beta$的增大，
+节点的传输功率收到限制，不能随意的增大自己的发送功率，使得各个无线体域网内部的节点获得的平均SINR误差变大。因此$\beta$对SINR误差和能耗能够起到有效的调节作用，当系统对
+能耗的要求比较严格时，可以选取一个较大的$\beta$参数限制能耗，反过来，如果更强调SINR的满意度，则就应该使用较小的$\beta$值。
+
+最后，我们对提出的QoS保障的功率控制博弈模型的有效性进行了分析，如\autoref{fig:WBANstructure2}所示，在逐渐增加无线体域网功率的时候，无线体域网的平均SINR会逐渐降低。
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.8\textwidth]{ustc_paper1_comparison_model}
+\figcaption{本文提出的模型和论文\scite{zou20144bayesian} 提出的模型关于功耗和信噪比误差性能对比图}
+\label{fig:WBANstructure2}
+\end{figure}
+同\scite{zou20144bayesian}提出的博弈模型相比，本文提出的模型强调了对节点QoS的保障，因此从图中可以看到，在无线体域网平均的能耗相同的时候，本文提出的模型能够使得无线体域网
+能够获得更低的SINR均方误差，实验结果验证了我们博弈模型设计的有效性。
+
+\section{本章小结}
+本章对静止场景下的无线体域网间的干扰减轻策略进行了详细的描述。首先对无线体域网间的干扰进行了系统建模，并构建了基于QoS保障的功率博弈的模型。在此基础上对该博弈模型的纳什
+均衡解进行了分析，证明了存在至少一个纳什均衡解，并且推导出了保证唯一性纳什均衡解的充分性条件。然后利用历史干扰信息的基础上，设计出了纳什均衡解的非合作式求解算法。最后
+进行了实验仿真验证了模型和算法的有效性。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,421 @@
+\begin{thebibliography}{10}
+
+\bibitem{orientationTransation1}
+Anjum A, Ilyas M~U.
+\newblock Activity recognition using smartphone sensors.
+\newblock Proceedings of Consumer Communications and Networking Conference
+  (CCNC), 2013 IEEE. IEEE, 2013.
+\newblock  914--919
+\unskip.
+
+\bibitem{bisio2014comparison}
+Bisio I, Lavagetto F, Marchese M, et~al.
+\newblock Comparison of situation awareness algorithms for remote health
+  monitoring with smartphones.
+\newblock Proceedings of Global Communications Conference (GLOBECOM), 2014
+  IEEE. IEEE, 2014.
+\newblock  2454--2459
+\unskip.
+
+\bibitem{lockhart2012applications}
+Lockhart J~W, Pulickal T, Weiss G~M.
+\newblock Applications of mobile activity recognition.
+\newblock Proceedings of Proceedings of the 2012 ACM Conference on Ubiquitous
+  Computing. ACM, 2012.
+\newblock  1054--1058
+\unskip.
+
+\bibitem{avci2010activity}
+Avci A, Bosch S, Marin-Perianu M, et~al.
+\newblock Activity recognition using inertial sensing for healthcare, wellbeing
+  and sports applications: A survey.
+\newblock Proceedings of Architecture of computing systems (ARCS), 2010 23rd
+  international conference on. VDE, 2010.
+\newblock  1--10
+\unskip.
+
+\bibitem{surveyOnSensors}
+Lara O~D, Labrador M~A.
+\newblock A survey on human activity recognition using wearable sensors.
+\newblock Communications Surveys \& Tutorials, IEEE, 2013, 15(3):1192--1209
+\unskip.
+
+\bibitem{surveyOnVision}
+Poppe R.
+\newblock A survey on vision-based human action recognition.
+\newblock Image and vision computing, 2010, 28(6):976--990
+\unskip.
+
+\bibitem{sensorBased}
+Chen L, Hoey J, Nugent C~D, et~al.
+\newblock Sensor-based activity recognition.
+\newblock Systems, man, and cybernetics, Part C: Applications and reviews, IEEE
+  Transactions on, 2012, 42(6):790--808
+\unskip.
+
+\bibitem{kozina2013efficient}
+Kozina S, Gjoreski H, Gams M, et~al.
+\newblock Efficient activity recognition and fall detection using
+  accelerometers.
+\newblock Proceedings of Evaluating AAL Systems Through Competitive
+  Benchmarking. Springer, 2013: 13--23
+\unskip.
+
+\bibitem{lane2010survey}
+Lane N~D, Miluzzo E, Lu H, et~al.
+\newblock A survey of mobile phone sensing.
+\newblock Communications Magazine, IEEE, 2010, 48(9):140--150
+\unskip.
+
+\bibitem{smartphoneSensor}
+Su X, Tong H, Ji P.
+\newblock Activity recognition with smartphone sensors.
+\newblock Tsinghua Science and Technology, 2014, 19(3):235--249
+\unskip.
+
+\bibitem{rashvand2015smartphone}
+Rashvand H~F, Hsiao K~F.
+\newblock Smartphone intelligent applications: a brief review.
+\newblock Multimedia Systems, 2015, 21(1):103--119
+\unskip.
+
+\bibitem{berchtold2010actiserv}
+Berchtold M, Budde M, Gordon D, et~al.
+\newblock Actiserv: Activity recognition service for mobile phones.
+\newblock Proceedings of Wearable Computers (ISWC), 2010 International
+  Symposium on. IEEE, 2010.
+\newblock  1--8
+\unskip.
+
+\bibitem{gyHorbiro2009activity}
+Gy{\H{o}}rb{\'\i}r{\'o} N, F{\'a}bi{\'a}n {\'A}, Hom{\'a}nyi G.
+\newblock An activity recognition system for mobile phones.
+\newblock Mobile Networks and Applications, 2009, 14(1):82--91
+\unskip.
+
+\bibitem{siirtola2012recognizing}
+Siirtola P, R{\"o}ning J.
+\newblock Recognizing human activities user-independently on smartphones based
+  on accelerometer data.
+\newblock International Journal of Interactive Multimedia and Artificial
+  Intelligence, 2012, 1(5)
+\unskip.
+
+\bibitem{kwapisz2011activity}
+Kwapisz J~R, Weiss G~M, Moore S~A.
+\newblock Activity recognition using cell phone accelerometers.
+\newblock ACM SigKDD Explorations Newsletter, 2011, 12(2):74--82
+\unskip.
+
+\bibitem{benbasat2007framework}
+Benbasat A~Y, Paradiso J~A.
+\newblock A framework for the automated generation of power-efficient
+  classifiers for embedded sensor nodes.
+\newblock Proceedings of Proceedings of the 5th international conference on
+  Embedded networked sensor systems. ACM, 2007.
+\newblock  219--232
+\unskip.
+
+\bibitem{oneSensorbased}
+Zhang M, Sawchuk A~A.
+\newblock USC-HAD: a daily activity dataset for ubiquitous activity recognition
+  using wearable sensors.
+\newblock Proceedings of Proceedings of the 2012 ACM Conference on Ubiquitous
+  Computing. ACM, 2012.
+\newblock  1036--1043
+\unskip.
+
+\bibitem{reviewOnSensorbased}
+Yang C~C, Hsu Y~L.
+\newblock A review of accelerometry-based wearable motion detectors for
+  physical activity monitoring.
+\newblock Sensors, 2010, 10(8):7772--7788
+\unskip.
+
+\bibitem{surveyOnSensorBased}
+Atallah L, Yang G~Z.
+\newblock The use of pervasive sensing for behaviour profiling—a survey.
+\newblock Pervasive and Mobile Computing, 2009, 5(5):447--464
+\unskip.
+
+\bibitem{surveyOnMobileSensing}
+Lane N~D, Miluzzo E, Lu H, et~al.
+\newblock A survey of mobile phone sensing.
+\newblock Communications Magazine, IEEE, 2010, 48(9):140--150
+\unskip.
+
+\bibitem{diffSensors}
+Shoaib M, Scholten H, Havinga P~J.
+\newblock Towards physical activity recognition using smartphone sensors.
+\newblock Proceedings of Ubiquitous Intelligence and Computing, 2013 IEEE 10th
+  International Conference on and 10th International Conference on Autonomic
+  and Trusted Computing (UIC/ATC). IEEE, 2013.
+\newblock  80--87
+\unskip.
+
+\bibitem{fixPositionandOrientation1}
+Hung W~C, Shen F, Wu Y~L, et~al.
+\newblock Activity Recognition with sensors on mobile devices.
+\newblock Proceedings of Machine Learning and Cybernetics (ICMLC), 2014
+  International Conference on, volume~2. IEEE, 2014.
+\newblock  449--454
+\unskip.
+
+\bibitem{fixPositionandOrientation2}
+Viet V~Q, Thang H~M, Choi D.
+\newblock Adaptive energy-saving strategy for activity recognition on mobile
+  phone.
+\newblock Proceedings of Signal Processing and Information Technology (ISSPIT),
+  2012 IEEE International Symposium on. IEEE, 2012.
+\newblock  000095--000100
+\unskip.
+
+\bibitem{orientationProblem}
+Henpraserttae A, Thiemjarus S, Marukatat S.
+\newblock Accurate activity recognition using a mobile phone regardless of
+  device orientation and location.
+\newblock Proceedings of Body Sensor Networks (BSN), 2011 International
+  Conference on. IEEE, 2011.
+\newblock  41--46
+\unskip.
+
+\bibitem{fixOrientationData}
+Rasheed M~B, Javaid N, Ali~Alghamdi T, et~al.
+\newblock Evaluation of Human Activity Recognition and Fall Detection Using
+  Android Phone.
+\newblock Proceedings of Advanced Information Networking and Applications
+  (AINA), 2015 IEEE 29th International Conference on. IEEE, 2015.
+\newblock  163--170
+\unskip.
+
+\bibitem{orientationTransation2}
+Thiemjarus S, Henpraserttae A, Marukatat S.
+\newblock A study on instance-based learning with reduced training prototypes
+  for device-context-independent activity recognition on a mobile phone.
+\newblock Proceedings of Body Sensor Networks (BSN), 2013 IEEE International
+  Conference on. IEEE, 2013.
+\newblock  1--6
+\unskip.
+
+\bibitem{frequencyForPosition}
+Wang C, Zhang J, Wang Z, et~al.
+\newblock Position-independent activity recognition model for smartphone based
+  on frequency domain algorithm.
+\newblock Proceedings of Computer Science and Network Technology (ICCSNT), 2013
+  3rd International Conference on. IEEE, 2013.
+\newblock  396--399
+\unskip.
+
+\bibitem{positionClassifier}
+Kelly D, Caulfield B.
+\newblock An investigation into non-invasive physical activity recognition
+  using smartphones.
+\newblock Proceedings of Engineering in Medicine and Biology Society (EMBC),
+  2012 Annual International Conference of the IEEE. IEEE, 2012.
+\newblock  3340--3343
+\unskip.
+
+\bibitem{positionClassifierProblem}
+Yurur O, Labrador M, Moreno W.
+\newblock Adaptive and energy efficient context representation framework in
+  mobile sensing.
+\newblock Mobile Computing, IEEE Transactions on, 2014, 13(8):1681--1693
+\unskip.
+
+\bibitem{otherSensorCompensate}
+Xie F, Song A, Ciesielski V.
+\newblock Activity recognition by smartphone based multi-channel sensors with
+  genetic programming.
+\newblock Proceedings of Evolutionary Computation (CEC), 2013 IEEE Congress on.
+  IEEE, 2013.
+\newblock  1162--1169
+\unskip.
+
+\bibitem{othersensorInstance1}
+Thiemjarus S.
+\newblock A device-orientation independent method for activity recognition.
+\newblock Proceedings of Body Sensor Networks (BSN), 2010 International
+  Conference on. IEEE, 2010.
+\newblock  19--23
+\unskip.
+
+\bibitem{othersensorInstance2}
+Zhao K, Du J, Li C, et~al.
+\newblock Healthy: A diary system based on activity recognition using
+  smartphone.
+\newblock Proceedings of Mobile Ad-Hoc and Sensor Systems (MASS), 2013 IEEE
+  10th International Conference on. IEEE, 2013.
+\newblock  290--294
+\unskip.
+
+\bibitem{pressureSensor}
+El~Halabi A, Artail H.
+\newblock Integrating pressure and accelerometer sensing for improved activity
+  recognition on smartphones.
+\newblock Proceedings of Communications and Information Technology (ICCIT),
+  2013 Third International Conference on. IEEE, 2013.
+\newblock  121--125
+\unskip.
+
+\bibitem{gps}
+Das R~D, Ronald N, Winter S.
+\newblock Clustering based transfer detection with fuzzy activity recognition
+  from smart-phone GPS trajectories.
+\newblock Proceedings of Intelligent Transportation Systems (ITSC), 2014 IEEE
+  17th International Conference on. IEEE, 2014.
+\newblock  3138--3143
+\unskip.
+
+\bibitem{zappi2008activity}
+Zappi P, Lombriser C, Stiefmeier T, et~al.
+\newblock Activity recognition from on-body sensors: accuracy-power trade-off
+  by dynamic sensor selection.
+\newblock Proceedings of Wireless sensor networks. Springer, 2008: 17--33
+\unskip.
+
+\bibitem{modelVarialb}
+Yan Z, Subbaraju V, Chakraborty D, et~al.
+\newblock Energy-efficient continuous activity recognition on mobile phones: An
+  activity-adaptive approach.
+\newblock Proceedings of Wearable Computers (ISWC), 2012 16th International
+  Symposium on. Ieee, 2012.
+\newblock  17--24
+\unskip.
+
+\bibitem{sensorSet}
+Wang Y, Lin J, Annavaram M, et~al.
+\newblock A framework of energy efficient mobile sensing for automatic user
+  state recognition.
+\newblock Proceedings of Proceedings of the 7th international conference on
+  Mobile systems, applications, and services. ACM, 2009.
+\newblock  179--192
+\unskip.
+
+\bibitem{sensorSetAndmodel}
+Gordon D, Czerny J, Miyaki T, et~al.
+\newblock Energy-efficient activity recognition using prediction.
+\newblock Proceedings of Wearable Computers (ISWC), 2012 16th International
+  Symposium on. IEEE, 2012.
+\newblock  29--36
+\unskip.
+
+\bibitem{precionModel}
+Viet N~H, Munthe-Kaas E, Plagemann T.
+\newblock Quality and energy aware data acquisition for activity and locomotion
+  recognition.
+\newblock Proceedings of Pervasive Computing and Communications Workshops
+  (PERCOM Workshops), 2013 IEEE International Conference on. IEEE, 2013.
+\newblock  493--498
+\unskip.
+
+\bibitem{adapteStratery}
+Yurur O, Liu C~H, Perera C, et~al.
+\newblock Energy-efficient and context-aware smartphone sensor employment.
+\newblock Vehicular Technology, IEEE Transactions on, 2015, 64(9):4230--4244
+\unskip.
+
+\bibitem{wu2012classification}
+Wu W, Dasgupta S, Ramirez E~E, et~al.
+\newblock Classification accuracies of physical activities using smartphone
+  motion sensors.
+\newblock Journal of medical Internet research, 2012, 14(5):e130
+\unskip.
+
+\bibitem{gupta2014feature}
+Gupta P, Dallas T.
+\newblock Feature selection and activity recognition system using a single
+  triaxial accelerometer.
+\newblock Biomedical Engineering, IEEE Transactions on, 2014, 61(6):1780--1786
+\unskip.
+
+\bibitem{ustev2013user}
+Ustev Y~E, Durmaz~Incel O, Ersoy C.
+\newblock User, device and orientation independent human activity recognition
+  on mobile phones: Challenges and a proposal.
+\newblock Proceedings of Proceedings of the 2013 ACM conference on Pervasive
+  and ubiquitous computing adjunct publication. ACM, 2013.
+\newblock  1427--1436
+\unskip.
+
+\bibitem{lu2010jigsaw}
+Lu H, Yang J, Liu Z, et~al.
+\newblock The Jigsaw continuous sensing engine for mobile phone applications.
+\newblock Proceedings of Proceedings of the 8th ACM Conference on Embedded
+  Networked Sensor Systems. ACM, 2010.
+\newblock  71--84
+\unskip.
+
+\bibitem{lee2011activity}
+Lee Y~S, Cho S~B.
+\newblock Activity recognition using hierarchical hidden markov models on a
+  smartphone with 3D accelerometer.
+\newblock Proceedings of Hybrid Artificial Intelligent Systems. Springer, 2011:
+  460--467
+\unskip.
+
+\bibitem{bin2012classification}
+Abdullah M~F~A, Negara A~F~P, Sayeed M~S, et~al.
+\newblock Classification algorithms in human activity recognition using
+  smartphones.
+\newblock International Journal of Computer and Information Engineering, 2012,
+  6:77--84
+\unskip.
+
+\bibitem{brezmes2009activity}
+Brezmes T, Gorricho J~L, Cotrina J.
+\newblock Activity recognition from accelerometer data on a mobile phone.
+\newblock Proceedings of Distributed computing, artificial intelligence,
+  bioinformatics, soft computing, and ambient assisted living. Springer, 2009:
+  796--799
+\unskip.
+
+\bibitem{priyantha2010enabling}
+Priyantha B, Lymberopoulos D, Liu J.
+\newblock Enabling energy efficient continuous sensing on mobile phones with
+  littlerock.
+\newblock Proceedings of Proceedings of the 9th ACM/IEEE International
+  Conference on Information Processing in Sensor Networks. ACM, 2010.
+\newblock  420--421
+\unskip.
+
+\bibitem{rachuri2011sociablesense}
+Rachuri K~K, Mascolo C, Musolesi M, et~al.
+\newblock Sociablesense: exploring the trade-offs of adaptive sampling and
+  computation offloading for social sensing.
+\newblock Proceedings of Proceedings of the 17th annual international
+  conference on Mobile computing and networking. ACM, 2011.
+\newblock  73--84
+\unskip.
+
+\bibitem{ravi2005activity}
+Ravi N, Dandekar N, Mysore P, et~al.
+\newblock Activity recognition from accelerometer data.
+\newblock Proceedings of AAAI, volume~5, 2005.
+\newblock  1541--1546
+\unskip.
+
+\bibitem{raffa2010don}
+Raffa G, Lee J, Nachman L, et~al.
+\newblock Don't slow me down: Bringing energy efficiency to continuous gesture
+  recognition.
+\newblock Proceedings of Wearable Computers (ISWC), 2010 International
+  Symposium on. IEEE, 2010.
+\newblock  1--8
+\unskip.
+
+\bibitem{wang2009framework}
+Wang Y, Lin J, Annavaram M, et~al.
+\newblock A framework of energy efficient mobile sensing for automatic user
+  state recognition.
+\newblock Proceedings of Proceedings of the 7th international conference on
+  Mobile systems, applications, and services. ACM, 2009.
+\newblock  179--192
+\unskip.
+
+\bibitem{lester2006practical}
+Lester J, Choudhury T, Borriello G.
+\newblock A practical approach to recognizing physical activities.
+\newblock Proceedings of Pervasive Computing. Springer, 2006: 1--16
+\unskip.
+
+\end{thebibliography}
