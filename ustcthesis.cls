@@ -393,8 +393,8 @@
   \newgeometry{%
   top=3.8cm,
   bottom=3.8cm,
-  left=3.2cm,
-  right=3.2cm
+  left=1.0cm,
+  right=1.0cm
   }
   \pdfbookmark[-1]{\ustc@title}{title}
   \cleardoublepage
@@ -406,7 +406,7 @@
     \bfseries\USTCHUGE\ifustc@doctor
       {博士学位论文}
     \else\ifustc@master
-      {硕士学位论文}  
+      {工程硕士学位论文}  
     \else
       {学士学位论文}
     \fi\fi
@@ -433,9 +433,8 @@
   \else	\begin{tabular}{lc}%
 	  \bfseries{作者姓名：} & \ustc@underline[6cm]{\ustc@author}\\
 	  \bfseries{学科专业：} & \ustc@underline[6cm]{\ustc@major}\\
-	  \bfseries{导师姓名：} & \ustc@underline[6cm]{\ustc@advisor}\\
-	  \ifx\ustc@coadvisor\@empty\else
-	                        & \ustc@underline[6cm]{\ustc@coadvisor}\\\fi
+	  \bfseries{校内导师：} & \ustc@underline[6cm]{\ustc@advisor}\\
+	  \bfseries{企业导师：} & \ustc@underline[6cm]{\ustc@coadvisor}\\
 	  \bfseries{完成时间：} & \ustc@underline[6cm]{\ustc@submitdate}
 	\end{tabular}
   \fi}
@@ -466,7 +465,7 @@
     \USTCLARGE{\ttfamily\ifustc@doctor
       {A dissertation for doctor's degree}
     \else\ifustc@master
-      {A dissertation for master's degree}
+      {A dissertation for master's degree of engineering}
     \else
       {A dissertation for bachelor's degree}
     \fi\fi}
@@ -493,11 +492,9 @@
   \else
 	  \begin{tabular}{lc}
 	  	Author :& \ustc@underline[6cm]{\ustc@enauthor}\\
-	  	Speciality :& \ustc@underline[6cm]{\ustc@enmajor}\\
+	  	Speciality :& \ustc@underline[10cm]{\ustc@enmajor}\\
 	  	Supervisor :& \ustc@underline[6cm]{\ustc@enadvisor}\\
-		\ifx\ustc@encoadvisor\@empty\else
-	                     & \ustc@underline[6cm]{\ustc@encoadvisor}\\
-	    \fi
+	  	Enterprise Supervisor :& \ustc@underline[6cm]{\ustc@encoadvisor}\\
 	  	Finished Time :& \ustc@underline[6cm]{\ustc@ensubmitdate}
 	  \end{tabular}
   \fi}

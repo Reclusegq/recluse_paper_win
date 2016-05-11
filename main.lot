@@ -4,27 +4,25 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Android系统平台下内置传感器分类表\relax }}{10}{table.caption.8}
+\contentsline {table}{\numberline {2.1}{\ignorespaces Android系统平台下内置传感器分类表\relax }}{12}{table.caption.8}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces 本文所使用的特征列表\relax }}{23}{table.caption.15}
-\contentsline {table}{\numberline {3.2}{\ignorespaces 行为分组结果\relax }}{26}{table.caption.20}
-\contentsline {table}{\numberline {3.3}{\ignorespaces 实验数据的时间分配(单位：分钟$(min)$)\relax }}{29}{table.caption.25}
-\contentsline {table}{\numberline {3.4}{\ignorespaces 第一层分组分类的结果\relax }}{30}{table.caption.26}
-\contentsline {table}{\numberline {3.5}{\ignorespaces 静态行为分类策略的分类结果\relax }}{30}{table.caption.27}
-\contentsline {table}{\numberline {3.6}{\ignorespaces 位置分类的分类结果\relax }}{31}{table.caption.28}
-\contentsline {table}{\numberline {3.7}{\ignorespaces 本文框架的分类结果\relax }}{31}{table.caption.29}
-\contentsline {table}{\numberline {3.8}{\ignorespaces 文献\cite {orientationTransation1}的分类结果\relax }}{31}{table.caption.30}
-\contentsline {table}{\numberline {3.9}{\ignorespaces 文献\cite {bisio2014comparison}的分类结果\relax }}{31}{table.caption.31}
+\contentsline {table}{\numberline {3.1}{\ignorespaces 本文所使用的特征列表\relax }}{27}{table.caption.17}
+\contentsline {table}{\numberline {3.2}{\ignorespaces 行为分组结果\relax }}{30}{table.caption.22}
+\contentsline {table}{\numberline {3.3}{\ignorespaces 实验数据的时间分配(单位：分钟$(min)$)\relax }}{33}{table.caption.27}
+\contentsline {table}{\numberline {3.4}{\ignorespaces 第一层分组分类的结果\relax }}{34}{table.caption.28}
+\contentsline {table}{\numberline {3.5}{\ignorespaces 静态行为分类策略的分类结果\relax }}{34}{table.caption.29}
+\contentsline {table}{\numberline {3.6}{\ignorespaces 位置分类的分类结果\relax }}{35}{table.caption.30}
+\contentsline {table}{\numberline {3.7}{\ignorespaces 本文框架的分类结果\relax }}{35}{table.caption.31}
+\contentsline {table}{\numberline {3.8}{\ignorespaces 文献\cite {orientationTransation1}的分类结果\relax }}{35}{table.caption.32}
+\contentsline {table}{\numberline {3.9}{\ignorespaces 文献\cite {bisio2014comparison}的分类结果\relax }}{35}{table.caption.33}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces 100\%采样时间情况下传感器能耗(单位：毫安时$(mAh)$)\relax }}{38}{table.caption.34}
-\contentsline {table}{\numberline {4.2}{\ignorespaces 50\%采样时间情况下传感器能耗(单位：毫安时$(mAh)$)\relax }}{38}{table.caption.35}
-\contentsline {table}{\numberline {4.3}{\ignorespaces 处理器计算FFT和ACF的能耗(单位：毫安时$(mAh)$)\relax }}{40}{table.caption.40}
-\contentsline {table}{\numberline {4.4}{\ignorespaces 处理器计算FFT和ACF的能耗(单位：毫安时$(mAh)$)\relax }}{42}{table.caption.43}
-\contentsline {table}{\numberline {4.5}{\ignorespaces 各电量状态下各行为的最佳识别策略\relax }}{43}{table.caption.45}
-\contentsline {table}{\numberline {4.6}{\ignorespaces 识别准确率\relax }}{45}{table.caption.47}
-\contentsline {table}{\numberline {4.7}{\ignorespaces 识别能耗\relax }}{45}{table.caption.48}
-\addvspace {10\p@ }
-\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces 100\%采样时间情况下传感器能耗(单位：毫安时$(mAh)$)\relax }}{42}{table.caption.36}
+\contentsline {table}{\numberline {4.2}{\ignorespaces 50\%采样时间情况下传感器能耗(单位：毫安时$(mAh)$)\relax }}{42}{table.caption.37}
+\contentsline {table}{\numberline {4.3}{\ignorespaces 处理器计算FFT和ACF的能耗(单位：毫安时$(mAh)$)\relax }}{44}{table.caption.43}
+\contentsline {table}{\numberline {4.4}{\ignorespaces 处理器计算FFT和ACF的能耗(单位：毫安时$(mAh)$)\relax }}{46}{table.caption.46}
+\contentsline {table}{\numberline {4.5}{\ignorespaces 各电量状态下各行为的识别策略\relax }}{47}{table.caption.49}
+\contentsline {table}{\numberline {4.6}{\ignorespaces 对比实验中三种情况下的识别准确率\relax }}{50}{table.caption.51}
+\contentsline {table}{\numberline {4.7}{\ignorespaces 对比实验中三种情况下的识别能耗\relax }}{50}{table.caption.52}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
